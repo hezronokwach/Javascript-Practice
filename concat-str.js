@@ -1,5 +1,5 @@
 function concatStr(arg1, arg2) {
 
-    return JSON.stringify(arg1) + JSON.stringify(arg2)
+    return arg1.concat(arg2)
 }
-console.log(concatStr(1, 2))
+console.log(concatStr('a', 'b'))
