@@ -11,10 +11,11 @@ function yell(args){
 }
 
 function whisper(args){
-    return args.toLowerCase()
+    return '*' + args.toLowerCase() + '*'
 }
 
 function capitalize(args){
     return args[0].toUpperCase() + args.slice(1).toLowerCase()    
 }
+console.log(whisper('DÉJÀ VU'))
 
