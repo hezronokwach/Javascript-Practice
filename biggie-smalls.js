@@ -1,2 +1,2 @@
-const smalls = Number.MIN_VALUE
-const biggie = Number.MAX_VALUE + 1
+const smalls = Number.NEGATIVE_INFINITY
+const biggie = Number.POSITIVE_INFINITY
