@@ -1,4 +1,5 @@
-function concatStr(arg1, arg2) {
 
-    return arg1.concat(arg2)
+function concatStr(arg1, arg2) {
+    let result = `${arg1}${arg2}`;
+    return result
 }
