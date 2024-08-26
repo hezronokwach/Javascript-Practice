@@ -1,4 +1,4 @@
-const escapeStr = "`\\\/\"\'";
+const escapeStr = "\`\\\/\"\'";
 const arr = [4, '2'];
 Object.freeze(arr);
 const obj = {
@@ -16,5 +16,6 @@ const nested = {
         "bool": true
     }
 };
-Object.freeze(nested);
+Object.freeze(nested.arr);
+Object.freeze(nested.obj);
 
