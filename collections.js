@@ -8,7 +8,7 @@ const mapToObj = value => Object.fromEntries(value.entries());
 const objToArr = value => Object.values(value);
 const objToMap = value => new Map(Object.entries(value));
 const arrToObj = value => Object.assign({}, value);
-const strToObj = value =>Object.entries(strToArr(value));
+const strToObj = value =>Object.assign({},strToArr(value));
 
 function superTypeOf(value){
     if (value instanceof Map){
