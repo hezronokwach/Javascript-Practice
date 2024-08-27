@@ -1,5 +1,5 @@
 const arrToSet = (value) => new Set(value);
-const arrToStr = (value) => value.toString();
+const arrToStr = (value) => value.join();
 const setToArr = (value) => [...value];
 const setToStr = (value) => [...value].join(' ');
 const strToArr = (value) => value.split(" ");
