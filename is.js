@@ -1,6 +1,6 @@
 num:
 function Num(args) {
-    if (typeof (args) === "number") {
+    if (typeof (args) == "number") {
         return true;
     }
     return false;
@@ -14,7 +14,7 @@ function Nan(args) {
 }
 str:
 function Str(args) {
-    if (typeof (args) === "string") {
+    if (typeof (args) == "string") {
         return true;
     }
     return false;
@@ -22,14 +22,14 @@ function Str(args) {
 }
 bool:
 function Bool(args) {
-    if (typeof (args) === "boolean") {
+    if (typeof (args) == "boolean") {
         return true;
     }
     return false;
 }
 undef:
 function Undef(args) {
-    if (typeof (args) === "undefined") {
+    if (typeof (args) == "undefined") {
         return true;
     }
     return false;
@@ -50,28 +50,28 @@ function Arr(args) {
 }
 obj:
 function Obj(args) {
-    if (typeof (args) === "object") {
+    if (typeof (args) == "object") {
         return true;
     }
     return false;
 }
 fun:
 function Fun(args) {
-    if (typeof (args) === "function") {
+    if (typeof (args) == "function") {
         return true;
     }
     return false;
 }
 truthy:
 function Truthy(args) {
-    if ((args) === true) {
+    if ((args) == true) {
         return true;
     }
     return false;
 }
 falsy:
 function Falsy(args) {
-    if ((args) === false) {
+    if ((args) == false) {
         return true;
     }
     return false;
