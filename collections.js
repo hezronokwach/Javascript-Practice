@@ -21,7 +21,7 @@ function superTypeOf(value) {
         return 'null';
     } else if (typeof value === "string") {
         return 'String';
-    } else if (typeof value === "number" || "NaN") {
+    } else if (typeof value === "number") {
         return 'Number';
     } else if (Array.isArray(value)) {
         return 'Array';
@@ -29,7 +29,8 @@ function superTypeOf(value) {
         return 'undefined';
     } else if (typeof value === "function") {
         return 'Function'
+    } else if ((typeof value === NaN)) {
+        return 'Number'
     }
 }
 console.log(superTypeOf([]))
-value !== null && !is.arr(value) && !is.fun(value) 
