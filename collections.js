@@ -2,7 +2,7 @@ const arrToSet = (value) => new Set(value);
 const arrToStr = (value) => value.join("");
 const setToArr = (value) => [...value];
 const setToStr = (value) => [...value].join("");
-const strToArr = (value) => value.split(" ");
+const strToArr = (value) => [...value];
 const mapToObject = (value) => Object.fromEntries(value.entries());
 const objToArr = (value) => Object.values(value);
 const objToMap = (value) => new Map(Object.entries(value));
