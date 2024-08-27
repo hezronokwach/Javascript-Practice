@@ -1,5 +1,5 @@
 const arrToSet = (value) => new Set(value);
-const arrToStr = (value) => value.join();
+const arrToStr = (value) => value.join("");
 const setToArr = (value) => [...value];
 const setToStr = (value) => [...value].join(' ');
 const strToArr = (value) => value.split(" ");
@@ -30,3 +30,4 @@ function superTypeOf(value){
         return 'Function'
     }
 }
+console.log(arrToStr([1, 'ctx', 'ctx', 3]))
