@@ -15,5 +15,6 @@ function abs(num) {
     if (num == 0){
         return 0
     }
+    return num
 }
-console.log(abs(0))
+console.log(abs(132))
