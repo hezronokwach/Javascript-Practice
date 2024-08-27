@@ -9,7 +9,7 @@ is.bool = (value) => typeof value === "boolean"
 
 is.undef = (value) => typeof value === "undefined"
 
-is.def = (value) => value != null
+is.def = (value) => !is.def(value)
 
 is.arr = (value) => Array.isArray(value)
 
