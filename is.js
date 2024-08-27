@@ -13,7 +13,7 @@ is.def = (value) => value != null
 
 is.arr = (value) => Array.isArray(value)
 
-is.obj = (value) => typeof value === "object" && value !== null && !Array.isArray(value) && !typeof value === "function" 
+is.obj = (value) => typeof value === "object" && value !== null && !is.arr(value) && !is.fun(value) 
 
 is.fun = (value) => typeof value === "function"
 
