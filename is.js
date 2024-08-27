@@ -1,25 +1,22 @@
 
-num: (value) => typeof value === "number"
+is.num = (value) => typeof value === "number"
 
-nan: (value) => Number.isNaN(value)
+is.nan = (value) => Number.isNaN(value)
 
-str: (value) => typeof value === "string"
+is.str = (value) => typeof value === "string"
 
-bool: (value) => typeof value === "boolean"
+is.bool = (value) => typeof value === "boolean"
 
-undef: (value) => typeof value === "undefined"
+is.undef = (value) => typeof value === "undefined"
 
-def: (value) => value != null
+is.def = (value) => value != null
 
-arr: (value) => Array.isArray(value)
+is.arr = (value) => Array.isArray(value)
 
-obj: (value) => typeof value === "object" && value !== null
+is.obj = (value) => typeof value === "object" && value !== null
 
-fun: (value) => typeof value === "function"
+is.fun = (value) => typeof value === "function"
 
-truthy: (value) => Boolean(value) === true
+is.truthy = (value) => Boolean(value) === true
 
-falsy: (value) => Boolean(value) === false
-
-
-
+is.falsy = (value) => Boolean(value) === false
