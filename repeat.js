@@ -1,7 +1,7 @@
 //String.prototype.repeat = undefined
-var result = ""
-const repeat = (args, num) => {
 
+const repeat = (args, num) => {
+    let result = ""
     while (num > 0) {
         result += args
         num--
