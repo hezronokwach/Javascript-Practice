@@ -18,14 +18,15 @@ const indexOf = (args, value, index) => {
 }
 
 const lastIndexOf = (args, value, index) => {
-    let found = -1;
     if (args == null) {
         return -1
     }
-    if (index === undefined) {
-        index = 0
-    }
-    for (let i = args.length - 1 || index; i > 0; i--) {
+    let found = -1;
+    let start = args.length -1  
+    if (index != undefined) {
+        start = index
+    } 
+    for (let i = start ; i >= 0; i--) {
         if (args[i] === value) {
             found = i
             return i
@@ -53,4 +54,4 @@ const includes = (args, value) => {
     }
 }
 
-console.log(includes([1, 2, 3, 2, 6, 8, 3, 2, 1]))
+console.log(lastIndexOf(['t', 0, 0, 't'], 't', 2))
