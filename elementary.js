@@ -1,19 +1,43 @@
 const multiply = (a, b) => {
     let result = 0;
-    while (b > 0) {
-        result += a
-        b--
+    let absA = Math.abs(a)
+    let absB = Math.abs(b)
+    let isNegative = false;
+    if (a < 0 && b >= 0) {
+        isNegative = true;
+    } else if (a >= 0 && b < 0) {
+        isNegative = true;
     }
-    return result
+    while (absB > 0) {
+        result += absA
+        absB--
+    }
+    if (isNegative) {
+        return -result
+    } else {
+        return result
+    }
 }
 
 const divide = (a, b) => {
     let result = 0;
-    while ((a - b) > 0) {
-        result++
-        a -= b
+    let absA = Math.abs(a)
+    let absB = Math.abs(b)
+    let isNegative = false;
+    if (a < 0 && b >= 0) {
+        isNegative = true;
+    } else if (a >= 0 && b < 0) {
+        isNegative = true;
     }
-    return result
+    while ((absA - absB) > 0) {
+        result++
+        absA -= absB
+    }
+    if (isNegative) {
+        return -result
+    } else {
+        return result
+    }
 }
 
 const modulo = (a, b) => {
@@ -24,3 +48,4 @@ const modulo = (a, b) => {
     }
     return result
 }
+console.log(multiply(-1, -2))
