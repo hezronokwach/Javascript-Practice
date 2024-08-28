@@ -29,7 +29,7 @@ const divide = (a, b) => {
     } else if (a >= 0 && b < 0) {
         isNegative = true;
     }
-    while ((absA - absB) > 0) {
+    while ((absA - absB) >= 0) {
         result++
         absA -= absB
     }
@@ -41,14 +41,25 @@ const divide = (a, b) => {
 }
 
 const modulo = (a, b) => {
-    let result = 0;
-    if (a < b) {
-        return a
+    let result = a;
+    let flag = false;
+    if (a < 0){
+        a = -a;
+        flag = true;
     }
-    while ((a - b) >= 0) {
-        result = a - b
-        a -= b
+    if (b < 0){
+        b = -b
     }
-    return result
+    while (result >= b) {
+        result -= b;
+    }
+    if (flag) {
+        result = -result
+    }
+
+    return result;
 }
-console.log(modulo(34, 78))
+
+// Example usages
+console.log(divide(7, 3)); 
+
