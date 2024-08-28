@@ -17,12 +17,15 @@ const indexOf = (args, value, index) => {
     }
 }
 
-const lastIndexOf = (args, value) => {
+const lastIndexOf = (args, value, index) => {
     let found = -1;
     if (args == null) {
         return -1
     }
-    for (let i = args.length - 1; i > 0; i--) {
+    if (index === undefined) {
+        index = 0
+    }
+    for (let i = args.length - 1 || index; i > 0; i--) {
         if (args[i] === value) {
             found = i
             return i
@@ -38,7 +41,7 @@ const includes = (args, value) => {
     if (args == null) {
         return false
     }
-    for (let i = 0 ; i < args.length; i++) {
+    for (let i = 0; i < args.length; i++) {
         if (args[i] === value) {
             found = i
         }
