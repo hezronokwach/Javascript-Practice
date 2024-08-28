@@ -41,7 +41,7 @@ const divide = (a, b) => {
 }
 
 const modulo = (a, b) => {
-    let result = a;
+   
     let flag = false;
     if (a < 0){
         a = -a;
@@ -50,6 +50,7 @@ const modulo = (a, b) => {
     if (b < 0){
         b = -b
     }
+    let result = a;
     while (result >= b) {
         result -= b;
     }
@@ -61,5 +62,5 @@ const modulo = (a, b) => {
 }
 
 // Example usages
-console.log(divide(7, 3)); 
+console.log(modulo(-123, 22)); 
 
