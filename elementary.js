@@ -42,10 +42,13 @@ const divide = (a, b) => {
 
 const modulo = (a, b) => {
     let result = 0;
+    if (a < b) {
+        return a
+    }
     while ((a - b) >= 0) {
         result = a - b
         a -= b
     }
     return result
 }
-console.log(multiply(-1, -2))
+console.log(modulo(34, 78))
