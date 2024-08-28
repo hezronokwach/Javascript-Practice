@@ -9,4 +9,3 @@ const repeat = (args, num) => {
     }
     return result
 }
-console.log(repeat("h", 5))
