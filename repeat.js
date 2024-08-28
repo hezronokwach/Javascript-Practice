@@ -1,11 +1,10 @@
 //String.prototype.repeat = undefined
-let count = 0;
-let result = ""
+var result = ""
 const repeat = (args, num) => {
 
-    while (count < num) {
-        count++
+    while (num > 0) {
         result += args
+        num--
     }
     return result
 }
