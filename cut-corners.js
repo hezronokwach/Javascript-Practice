@@ -20,6 +20,9 @@ const multiply = (a, b) => {
 }
 
 const divide = (a, b) => {
+    if (b === 0) {
+        throw new Error("Division by zero is not allowed.");
+    }
     let result = 0;
     let absA = Math.abs(a)
     let absB = Math.abs(b)
@@ -41,6 +44,9 @@ const divide = (a, b) => {
 }
 
 const modulo = (a, b) => {
+    if (b === 0) {
+        throw new Error("Division by zero is not allowed.");
+    }
     let flag = false;
     if (a < 0) {
         a = -a;
