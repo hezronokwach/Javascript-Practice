@@ -72,6 +72,11 @@ const round = (value) => {
 }
 
 const floor = (value) => {
+    if (value === 0) {
+        return 0
+    } else if (value === -0) {
+        return -0
+    }
     let product = multiply(value, 10);
     if (value < 0) {
         return divide(product, 10) - 1;
@@ -81,11 +86,21 @@ const floor = (value) => {
 }
 
 const trunc = (value) => {
+    if (value === 0) {
+        return 0
+    } else if (value === -0) {
+        return -0
+    }
     let product = multiply(value, 10);
     return divide(product, 10);
 }
 
 const ceil = (value) => {
+    if (value === 0) {
+        return 0
+    } else if (value === -0) {
+        return -0
+    }
     let product = multiply(value, 10);
     if (value < 0) {
         return divide(product, 10);
@@ -95,11 +110,11 @@ const ceil = (value) => {
 }
 
 
-// const nums = [3.7, -3.7, 3.1, -3.1]
-// console.log(nums.map(round))
-// console.log(nums.map(floor))
-// console.log(nums.map(trunc))
-// console.log(nums.map(ceil))
+// const nums = [3.7, -3.7, 3.1, 0]
+//  console.log(nums.map(round))
+//  //console.log(nums.map(floor))
+// // console.log(nums.map(trunc))
+// //console.log(nums.map(ceil))
 
 
 
