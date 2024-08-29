@@ -67,6 +67,13 @@ const modulo = (a, b) => {
 }
 
 const round = (value) => {
+    if (value === 0) {
+        return 0
+    } else if (value === -Infinity){
+        return -Infinity
+    } else if (value === Infinity) {
+        return Infinity
+    }
     let product = value * 10;
     let mod = modulo(product, 10);
     if (mod >= 5) {
@@ -83,6 +90,10 @@ const floor = (value) => {
         return 0
     } else if (value === -0) {
         return -0
+    } else if (value === -Infinity){
+        return -Infinity
+    } else if (value === Infinity) {
+        return Infinity
     }
     let product = value * 10;
     if (value < 0) {
@@ -97,6 +108,10 @@ const trunc = (value) => {
         return 0
     } else if (value === -0) {
         return -0
+    } else if (value === -Infinity){
+        return -Infinity
+    } else if (value === Infinity) {
+        return Infinity
     }
     let product = value * 10;
     return divide(product, 10);
@@ -107,6 +122,10 @@ const ceil = (value) => {
         return 0
     } else if (value === -0) {
         return -0
+    } else if (value === -Infinity){
+        return -Infinity
+    } else if (value === Infinity) {
+        return Infinity
     }
     let product = value * 10;
     if (value < 0) {
@@ -115,6 +134,8 @@ const ceil = (value) => {
         return divide(product, 10) + 1;
     }
 }
+
+console.log(Math.abs(47/10))
 
 
 // const nums = [3.7, -3.7, 3.1, 0]
