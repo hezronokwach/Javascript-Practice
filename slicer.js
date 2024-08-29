@@ -11,18 +11,20 @@ const slice = (value, start, end) => {
         start = start + value.length-1;
     }
     if (Array.isArray(value)){
-        for (let i = start; i < end; i++){
+        for (let i = start; i <= end; i++){
             resultArray.push(value[i])
         }
         return resultArray
 
     } 
     if (typeof value === "string"){
-        for (let i = start; i < end; i++){
+        for (let i = start; i <= end; i++){
             resultStr += value[i]
         }
         return resultStr
     }    
 }
+
+console.log(slice('abcdef',2))
 
 
