@@ -5,10 +5,10 @@ const slice = (value, start, end) => {
         end = value.length-1;
     }
     if (end < 0 ){
-        end = end + value.length-1;        
+        end = end + value.length;        
     }
     if (start < 0){
-        start = start + value.length-1;
+        start = start + value.length;
     }
     if (Array.isArray(value)){
         for (let i = start; i <= end; i++){
@@ -25,6 +25,6 @@ const slice = (value, start, end) => {
     }    
 }
 
-console.log(slice('abcdef',2))
+console.log(slice('abcdef',-2))
 
 
