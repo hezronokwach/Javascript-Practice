@@ -1,104 +1,24 @@
-function round(n) {
-    if (n === 0) {
-        return 0
-    } else if (n === -Infinity) {
-        return -Infinity
-    } else if (n === Infinity) {
-        return Infinity
+function trunc(num) {
+    if (num < 0) {
+        return -trunc(-num);
     }
-    let isNegative = false;
-    if (n < 0) {
-        n = -n;
-        isNegative = true;
-    }
-    
-    let intPart = floor(n);
-    let fractPart = n - intPart;
-    
-    if (fractPart >= 0.5) {
-        intPart++;
-    }
-    
-    let result = intPart;
-    if (isNegative) {
-        result = -result;
-    }
-    return result;
-}
 
-function ceil(n) {
-    if (n === 0) {
-        return 0
-    } else if (n === -0) {
-        return -0
-    } else if (n === -Infinity) {
-        return -Infinity
-    } else if (n === Infinity) {
-        return Infinity
+    let answer = 0;
+    let multiplier= 1;
+
+    while (multiplier* 10 <= num) {
+        multiplier*= 10;
     }
-    let isNegative = false;    
-    let intPart = floor(n);
-    let fractPart = n - intPart;
-    
-    if (fractPart > 0) {
-        intPart++; 
-    }    
-    let result = intPart;  
-    return result;
-}
-function trunc(n) {
-    if (n === 0) {
-        return 0
-    } else if (n === -0) {
-        return -0
-    } else if (n === -Infinity) {
-        return -Infinity
-    } else if (n === Infinity) {
-        return Infinity
-    }
-    let isNegative = false;
-    if (n < 0) {
-        n = -n;
-        isNegative = true;
-    }
-    
-    let intPart = floor(n);
-    
-    let result = intPart;
-    if (isNegative) {
-        result = -result;
-    }
-    return result;
-}
-function floor(n) {
-    if (n === 0) {
-        return 0
-    } else if (n === -0) {
-        return -0
-    } else if (n === -Infinity) {
-        return -Infinity
-    } else if (n === Infinity) {
-        return Infinity
-    }
-    let isNegative = false;
-    if (n < 0) {
-        n = -n;
-        isNegative = true;
-    }
-    
-    let result = 0;
-    while (n >= 1) {
-        result++;
-        n -= 1;
-    }
-    
-    if (isNegative) {
-        if (n > 0) {
-            result = -result - 1; 
-        } else {
-            result = -result; 
+
+    while (multiplier>= 1) {
+        while (answer + multiplier<= num) {
+            answer += multiplier;
         }
+        multiplier/= 10;
     }
-    
-    return result;
+
+    return answer;
 }
+const round =(num) => num < 0 ? -trunc(-num + 0.5) : trunc(num + 0.5);
+const floor = (num) => num < 0 ? trunc(num) - (num !== trunc(num) ? 1 : 0) : trunc(num);
+const ceil =(num) => num < 0 ? trunc(num) : (num !== trunc(num) ? trunc(num) + 1 : trunc(num));
