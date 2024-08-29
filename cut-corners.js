@@ -30,7 +30,7 @@ const divide = (a, b) => {
         } else if (a >= 0 && b < 0) {
             isNegative = true;
         }
-        while ((absA - absB) >= 0) {
+        while ((absA >= absB)) {
             result++
             absA -= absB
         }
@@ -39,9 +39,7 @@ const divide = (a, b) => {
         } else {
             return result
         }
-
     }
-
 }
 
 const modulo = (a, b) => {
@@ -69,7 +67,7 @@ const modulo = (a, b) => {
 const round = (value) => {
     if (value === 0) {
         return 0
-    } else if (value === -Infinity){
+    } else if (value === -Infinity) {
         return -Infinity
     } else if (value === Infinity) {
         return Infinity
@@ -90,7 +88,7 @@ const floor = (value) => {
         return 0
     } else if (value === -0) {
         return -0
-    } else if (value === -Infinity){
+    } else if (value === -Infinity) {
         return -Infinity
     } else if (value === Infinity) {
         return Infinity
@@ -108,7 +106,7 @@ const trunc = (value) => {
         return 0
     } else if (value === -0) {
         return -0
-    } else if (value === -Infinity){
+    } else if (value === -Infinity) {
         return -Infinity
     } else if (value === Infinity) {
         return Infinity
@@ -122,7 +120,7 @@ const ceil = (value) => {
         return 0
     } else if (value === -0) {
         return -0
-    } else if (value === -Infinity){
+    } else if (value === -Infinity) {
         return -Infinity
     } else if (value === Infinity) {
         return Infinity
@@ -135,7 +133,7 @@ const ceil = (value) => {
     }
 }
 
-console.log(Math.abs(47/10))
+console.log(Math.abs(47 / 10))
 
 
 // const nums = [3.7, -3.7, 3.1, 0]
