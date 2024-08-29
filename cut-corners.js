@@ -41,13 +41,12 @@ const divide = (a, b) => {
 }
 
 const modulo = (a, b) => {
-   
     let flag = false;
-    if (a < 0){
+    if (a < 0) {
         a = -a;
         flag = true;
     }
-    if (b < 0){
+    if (b < 0) {
         b = -b
     }
     let result = a;
@@ -57,21 +56,52 @@ const modulo = (a, b) => {
     if (flag) {
         result = -result
     }
-
     return result;
 }
 
 const round = (value) => {
-    let product = multiply(value, 10); 
-    let mod = modulo(product, 10); 
-    if (mod >= 5 ){
-        return divide(product, 10) + 1; 
-    } else if(mod <= -5){
-        return divide(product, 10) - 1; 
+    let product = multiply(value, 10);
+    let mod = modulo(product, 10);
+    if (mod >= 5) {
+        return divide(product, 10) + 1;
+    } else if (mod <= -5) {
+        return divide(product, 10) - 1;
     } else {
-        return divide(product, 10); 
+        return divide(product, 10);
     }
 }
+
+const floor = (value) => {
+    let product = multiply(value, 10);
+    if (value < 0) {
+        return divide(product, 10) - 1;
+    } else {
+        return divide(product, 10);
+    }
+}
+
+const trunc = (value) => {
+    let product = multiply(value, 10);
+    return divide(product, 10);
+}
+
+const ceil = (value) => {
+    let product = multiply(value, 10);
+    if (value < 0) {
+        return divide(product, 10);
+    } else {
+        return divide(product, 10) + 1;
+    }
+}
+
+
+// const nums = [3.7, -3.7, 3.1, -3.1]
+// console.log(nums.map(round))
+// console.log(nums.map(floor))
+// console.log(nums.map(trunc))
+// console.log(nums.map(ceil))
+
+
 
 
 
