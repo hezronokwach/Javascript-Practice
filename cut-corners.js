@@ -126,10 +126,6 @@ const ceil = (value) => {
         return divide(product, 10) + 1;
     }
 }
-
-console.log(Math.abs(47 / 10))
-
-
 // const nums = [3.7, -3.7, 3.1, 0]
 // console.log(nums.map(round))
 //  //console.log(nums.map(floor))
