@@ -20,27 +20,21 @@
 // }
 
 const divide = (a, b) => {
-    if (b !== 0) {
-        let result = 0;
-        let absA = Math.abs(a)
-        let absB = Math.abs(b)
-        let isNegative = false;
-        if (a < 0 && b >= 0) {
-            isNegative = true;
-        } else if (a >= 0 && b < 0) {
-            isNegative = true;
-        }
-        while ((absA >= absB)) {
-            result++
-            absA -= absB
-        }
-        if (isNegative) {
-            return -result
-        } else {
-            return result
-        }
+    if (b === 0) {
+        throw new Error("Division by zero is not allowed.");
     }
+    let result = 0;
+    let absA = Math.abs(a);
+    let absB = Math.abs(b);
+    let isNegative = (a < 0) ^ (b < 0);
+
+    while (absA >= absB) {
+        result++;
+        absA -= absB;
+    }
+    return isNegative ? -result : result;
 }
+
 
 const modulo = (a, b) => {
     if (b !== 0) {
