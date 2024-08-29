@@ -10,10 +10,8 @@ const cutFirstLast = (str) => {
 const keepFirst = (str) => str.substring(0, 2);
 const keepLast = (str) => str.substring(str.length - 2, str.length);
 const keepFirstLast = (str) => {
-    if (str.length <= 2) {
+    if (str.length <= 3) {
         return str
-    } else if (str.length === 3) {
-        return keepFirst(str)
     } else {
         return keepFirst(str) + keepLast(str);
     }
