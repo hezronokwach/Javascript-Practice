@@ -117,8 +117,8 @@ const ceil = (value) => {
 }
 
 
-const nums = [3.7, -3.7, 3.1, 0]
-console.log(nums.map(round))
+// const nums = [3.7, -3.7, 3.1, 0]
+// console.log(nums.map(round))
 //  //console.log(nums.map(floor))
 // // console.log(nums.map(trunc))
 // //console.log(nums.map(ceil))
