@@ -72,9 +72,6 @@ const round = (value) => {
         return divide(product, 10); 
     }
 }
-const nums = [3.7, -3.7, 3.1, -3.1]
-console.log(nums.map(round)) // output: [ 4, -4, 3, -3 ]
-
 
 
 
