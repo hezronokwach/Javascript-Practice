@@ -10,13 +10,10 @@ const get = (src, path) => {
       return keys[i];
     }
     result = result[keys[i]];
-  }
-  
+  }  
   return result;
 }
 
 // Test case
-// const obj = { a: [{ b: t }] };
-// console.log(get(obj, 'a.0.b.toString')); // Should output: 'toString'
-
+// console.log(get({ a: [{ b: 't' }] }, 'a.0.b') === 't')
 // console.log(get({ a: [{ b: 't' }] }, 'a.0.b.toString')); // [Function: toString]
