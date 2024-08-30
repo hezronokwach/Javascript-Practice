@@ -1,14 +1,17 @@
 const pyramid = (value, number) => {
     let result = "";
     for (let i = 1; i <= number; i++) {
-      const spaces = " ".repeat(number - i);
-      const chars = value.repeat(2 * i - 1);
-      result += spaces + chars;
-      if (i < number) {
-        result += '\n';
-      }
+        result += " ".repeat(number - i).repeat(value.length);
+        result += value.repeat(i * 2 - 1);
+        if (i === number) {
+            return result;
+        }
+        result += '\n'
     }
     return result;
-  };
-  
-  console.log(pyramid('a', 5));
+};
+
+// Test
+// console.log(pyramid('{}', 12));
+// console.log(pyramid('ABC', 7))
+
