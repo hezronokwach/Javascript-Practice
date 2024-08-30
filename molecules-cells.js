@@ -9,9 +9,9 @@ const RNA = (dna) => {
                 result += 'C';
                 break;
             case 'A':
-                result += 'T';
+                result += 'U';
                 break;
-            case 'U':
+            case 'T':
                 result += 'A';
                 break;
             default:
@@ -45,4 +45,4 @@ const DNA = (rna) => {
     }
     return result;
 }
-// console.log(RNA('TAGC'))
+ //console.log(RNA('TAGC'))
