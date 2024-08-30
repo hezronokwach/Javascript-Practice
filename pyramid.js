@@ -1,17 +1,14 @@
 const pyramid = (value, number) => {
     let result = "";
-    const maxWidth = 4 * number - 3;  // Width of the widest row
-  
     for (let i = 1; i <= number; i++) {
-      const rowWidth = 2 * i - 1;  // Width of the current row
-      const padding = " ".repeat((maxWidth - rowWidth) / 2);
-      const row = value.repeat(rowWidth);
-      result += padding + row;
+      const spaces = " ".repeat(number - i);
+      const chars = value.repeat(2 * i - 1);
+      result += spaces + chars;
       if (i < number) {
         result += '\n';
       }
     }
-  
     return result;
   };
   
+  console.log(pyramid('a', 5));
