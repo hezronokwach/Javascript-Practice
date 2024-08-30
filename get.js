@@ -1,21 +1,22 @@
 const get = (src, path) => {
-    const keys = path.split('.');
-    let result = src;
-    
-    for (const key of keys) {
-      if (result && typeof result === 'object' && key in result) {
-        result = result[key];
-      } else {
-        return undefined;
-      }
+  const keys = path.split('.');
+  let result = src;
+  
+  for (let i = 0; i < keys.length; i++) {
+    if (result == null) {
+      return undefined;
     }
-    
-    return result;
-  };
+    if (i === keys.length - 1 && typeof result[keys[i]] === 'function') {
+      return keys[i];
+    }
+    result = result[keys[i]];
+  }
   
-//   const src = { nested: { key: 'peekaboo' } };
-//   const path = 'nested.key';
-//   console.log(get(src, path)); // -> 'peekaboo'
-//   console.log(get({ key: 'value' }, 'key'))
-  
-//   console.log(get(src, 'nested')); // -> { key: 'peekaboo' }
+  return result;
+}
+
+// Test case
+// const obj = { a: [{ b: t }] };
+// console.log(get(obj, 'a.0.b.toString')); // Should output: 'toString'
+
+// console.log(get({ a: [{ b: 't' }] }, 'a.0.b.toString')); // [Function: toString]
