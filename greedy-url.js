@@ -14,8 +14,8 @@ function getURL(dataSet) {
   }
   
   // Example usage
-  const dataSet = `qqq http:// qqqq q qqqqq https://something.com/hello qqqqqqq qhttp://example.com/hello?you=something&something=you`;
+  // const dataSet = `qqq http:// qqqq q qqqqq https://something.com/hello qqqqqqq qhttp://example.com/hello?you=something&something=you`;
   
-  console.log(getURL(dataSet));
-  console.log(greedyQuery(dataSet));
-  console.log(notSoGreedy(dataSet));
+  // console.log(getURL(dataSet));
+  // console.log(greedyQuery(dataSet));
+  // console.log(notSoGreedy(dataSet));
