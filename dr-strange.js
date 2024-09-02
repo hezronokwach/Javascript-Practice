@@ -16,13 +16,13 @@ const addWeek=(date) =>{
 
   return weekDays[dayIndex];
 }
-const timeTravel=(obj)=> {
-  let date = new Date(obj.date);
-  date.setHours(date.getHours() + obj.hour);
-  date.setMinutes(date.getMinutes() + obj.minute);
-  date.setSeconds(date.getSeconds() + obj.second);
-  return date;
-}
+const timeTravel = (obj) => {
+    let date = new Date(obj.date);
+    date.setHours(obj.hour);
+    date.setMinutes(obj.minute);
+    date.setSeconds(obj.second);
+    return date;
+  }
 
 console.log(timeTravel({
     date: new Date('2020-05-29 23:25:22'),
