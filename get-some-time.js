@@ -1,21 +1,36 @@
 function firstDayWeek(week, year) {
-    let date = new Date(year, 0, 1);
+    let time = new Date(year);
     if (week === 1) {
-        return formatDate(date);
+        time.setHours(24);
+        return formattedDate(time);
     }
     
-    date.setDate(date.getDate() + (week - 1) * 7);
-    while (date.getDay() !== 1) {
-        date.setDate(date.getDate() - 1);
-    }
+    let dayPlus = week * 7 * 24;
+    time.setHours(dayPlus - 123);
     
-    return formatDate(date);
+    for (let i = 0; i < 7; i++) {
+        if (getWeekDay(time) === 'Monday') {
+            return formattedDate(time);
+        }
+        time.setHours(-24);
+    }
+    return time;
 }
 
-function formatDate(date) {
-    let day = String(date.getDate()).padStart(2, '0');
-    let month = String(date.getMonth() + 1).padStart(2, '0');
-    let year = String(date.getFullYear()).padStart(4, '0');
+function getWeekDay(date) {
+    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    return days[date.getDay() - 1];
+}
+
+function formattedDate(d) {
+    let month = String(d.getMonth() + 1).padStart(2, '0');
+    let day = String(d.getDate() - 1).padStart(2, '0');
+    let year = String(d.getFullYear()).padStart(4, '0');
     return `${day}-${month}-${year}`;
 }
-console.log(firstDayWeek(1, '1000'))
+
+// Testing the function
+console.log(firstDayWeek(1, '0001')); // Expected: '01-01-0001'
+console.log(firstDayWeek(2, '0001')); // Expected: '08-01-0001'
+console.log(firstDayWeek(3, '0001')); // Expected: '15-01-0001'
+console.log(firstDayWeek(52, '0001')); // Expected: '22-12-0001'
