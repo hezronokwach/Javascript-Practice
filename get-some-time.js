@@ -1,5 +1,5 @@
-const firstDayOfWeek = (week, year) => {
-    const date = new Date(year, 0, 1 + (week - 1) * 7);
+const firstDayWeek = (week, year) => {
+    let date = new Date(year, 0, 1 + (week - 1) * 7);
     while (date.getDay() !== 1) {
         date.setDate(date.getDate() - 1);
     }
@@ -12,4 +12,4 @@ const firstDayOfWeek = (week, year) => {
     if (month < 10) month = '0' + month;
     return day + '-' + month + '-' + year;
 };
-console.log(firstDayOfWeek(4, 2022)); // 04-
+console.log((firstDayWeek(1, '1000')))
