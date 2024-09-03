@@ -49,7 +49,7 @@ function processFormatSpecifier(date, specifier) {
         case 'MMM':
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             return monthNames[date.getMonth()];
-        case 'MMMMM':
+        case 'MMMM':
             const monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             return monthNamesShort[date.getMonth()];
         case 'E':
@@ -87,4 +87,4 @@ function processFormatSpecifier(date, specifier) {
 
 // Example usage
 const d = new Date(-585, 4, 28)
-console.log(format(d, 'yyyy'));
+console.log(format(d, 'yyyy GGGG'));
