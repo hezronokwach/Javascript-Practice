@@ -33,7 +33,11 @@ function processFormatSpecifier(date, specifier) {
                 return date.getFullYear().toString();
             }
         case 'yyyy':
-            return date.getFullYear().toString().padStart(4, '0');
+            if (date.getFullYear() < 0) {
+                return Math.abs(date.getFullYear()).toString().padStart(4 , '0');
+            } else {
+                return date.getFullYear().toString();
+            }
         case 'G':
             return date.getFullYear() < 0 ? 'BC' : 'AD';
         case 'GGGG':
@@ -82,5 +86,5 @@ function processFormatSpecifier(date, specifier) {
 }
 
 // Example usage
-const d = new Date('July 21, 1969, 17:54:12')
-console.log(format(d, 'hh:mm:ss a'));
+const d = new Date(-585, 4, 28)
+console.log(format(d, 'yyyy'));
