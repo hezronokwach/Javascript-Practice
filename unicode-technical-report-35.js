@@ -46,16 +46,16 @@ function processFormatSpecifier(date, specifier) {
             return (date.getMonth() + 1).toString();
         case 'MM':
             return (date.getMonth() + 1).toString().padStart(2, '0');
-        case 'MMM':
+        case 'MMMM':
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             return monthNames[date.getMonth()];
-        case 'MMMM':
+        case 'MMM':
             const monthNamesShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             return monthNamesShort[date.getMonth()];
-        case 'E':
+        case 'EEEE':
             const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             return dayNames[date.getDay()];
-        case 'EEEE':
+        case 'E':
             const dayNamesShort = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
             return dayNamesShort[date.getDay()];
         case 'd':
