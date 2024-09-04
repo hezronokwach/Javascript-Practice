@@ -3,30 +3,15 @@ const adder = (arr, initial) => {
 }
 
 const sumOrMul = (arr, initial) => {
-    if (arr.length === 0) {
-        return initial !== undefined ? initial : 0;
-    } 
-    if (initial !== undefined) {
-        return arr.reduce(
-            (acc, curr) => {
-                if (curr % 2 == 0) {
-                    return acc *= curr
-                } else {
-                    return acc += curr
-                }
-            }, initial
-        )
-    } else if (initial === undefined) {
-        return arr.reduce(
-            (acc, curr) => {
-                if (curr % 2 == 0) {
-                    return acc *= curr
-                } else {
-                    return acc += curr
-                }
-            }, 0
-        )
-    }
+    return arr.reduce(
+        (acc, curr) => {
+            if (curr % 2 == 0) {
+                return acc *= curr
+            } else {
+                return acc += curr
+            }
+        }, initial !== undefined ? initial : 0
+    )
 }
 const funcExec = (arr) => {
     return arr.reduce((acc, func) => func(acc), undefined);
