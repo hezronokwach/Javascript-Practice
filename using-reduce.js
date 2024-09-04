@@ -1,6 +1,6 @@
 const adder = (arr, initial) => {
     if (arr.length === 0) {
-        return initial !== undefined ? initial : [];
+        return initial !== undefined ? initial : 0;
     }   
     if (initial !== undefined) {
         return arr.reduce(
@@ -14,7 +14,7 @@ const adder = (arr, initial) => {
 
 const sumOrMul = (arr, initial) => {
     if (arr.length === 0) {
-        return initial !== undefined ? initial : [];
+        return initial !== undefined ? initial : 0;
     } 
     if (initial !== undefined) {
         return arr.reduce(
