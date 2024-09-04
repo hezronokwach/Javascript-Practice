@@ -24,9 +24,9 @@ const citiesOnly = (arr) => {
     });
   }
   
-  // const trimTemp = (arr) => {
-  //   return arr.map(({ city, temperature }) => ({city,temperature: temperature.trim()}));
-  // };
+  const trimTemp = (arr) => {
+    return arr.map(({ city, temperature }) => ({city,temperature: temperature.trim()}));
+  };
   
   
   // console.log(citiesOnly([{
