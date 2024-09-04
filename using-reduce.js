@@ -13,8 +13,8 @@ const sumOrMul = (arr, initial) => {
         }, initial !== undefined ? initial : 0
     )
 }
-const funcExec = (arr) => {
-    return arr.reduce((acc, func) => func(acc), undefined);
+const funcExec = (arr, initial) => {
+    return arr.reduce((acc, func) => func(acc), initial);
 }
 //console.log(sumOrMul([1, 2, 3, 5, 8], 5))
 console.log((adder([]), 0))
