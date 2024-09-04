@@ -3,11 +3,11 @@ const filterShortStateName = (arr) => {
 }
 
 const filterStartVowel = (arr) => {
-    const vowels = 'aeiou';
+    const vowels = 'aeiouAEIOU';
     return arr.filter((word) => vowels.includes(word[0]));
 }
 const filter5Vowels = (arr) => {
-    const vowels = 'aeiou';
+    const vowels = 'aeiouAEIOU';
     return arr.filter(word => {
         let count = 0;
         for (let char of word) {
@@ -21,7 +21,7 @@ const filter5Vowels = (arr) => {
 };
 
 const filter1DistinctVowel = (arr) => {
-    const vowels = 'aeiou';
+    const vowels = 'aeiouAEIOU';
     return arr.filter(word => {
         const wordVowels = word.toLowerCase().replace(/[^aeiou]/g, '');
         return wordVowels.length > 0 && new Set(wordVowels).size === 1;
