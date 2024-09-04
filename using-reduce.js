@@ -3,12 +3,9 @@ const adder = (arr, initial) => {
         return initial !== undefined ? initial : 0;
     }   
     if (initial !== undefined) {
-        return arr.reduce(
-            (acc, curr) => acc + curr, initial);
-
-    } else if (initial === undefined) {
-        return arr.reduce(
-            (acc, curr) => acc + curr)
+        return arr.reduce((acc, curr) => acc + curr, initial);
+    } else {
+        return arr.reduce((acc, curr) => acc + curr);
     }
 }
 
