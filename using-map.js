@@ -24,10 +24,12 @@ const citiesOnly = (arr) => {
     });
   }
   
-  const trimTemp = (arr) => {
-    return arr.map(({ city, temperature }) => ({city,temperature: temperature.trim()}));
-  };
-  
+const trimTemp = (arr) => {
+  return arr.map(obj => ({
+    ...obj,
+    temperature: obj.temperature.trim()
+  }));
+};
   
   // console.log(citiesOnly([{
   //   city: 'Los Angeles',
