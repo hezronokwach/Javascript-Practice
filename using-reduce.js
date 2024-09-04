@@ -1,4 +1,7 @@
 const adder = (arr, initial) => {
+    if (arr.length === 0) {
+        return initial !== undefined ? initial : [];
+    }   
     if (initial !== undefined) {
         return arr.reduce(
             (acc, curr) => acc + curr, initial);
@@ -10,6 +13,9 @@ const adder = (arr, initial) => {
 }
 
 const sumOrMul = (arr, initial) => {
+    if (arr.length === 0) {
+        return initial !== undefined ? initial : [];
+    } 
     if (initial !== undefined) {
         return arr.reduce(
             (acc, curr) => {
@@ -36,4 +42,4 @@ const funcExec = (arr) => {
     return arr.reduce((acc, func) => func(acc), undefined);
 }
 //console.log(sumOrMul([1, 2, 3, 5, 8], 5))
-console.log((adder([1, 2, 3, 4]), 10))
+console.log((adder([]), 0))
