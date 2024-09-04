@@ -1,5 +1,7 @@
 const forEach = (arr, func) => {
-    arr.forEach((item) => {
-        func(item)
-    })
+    if (Array.isArray(arr)) {
+        for (let i = 0; i < arr.length; i++) {
+            func(arr[i], i, arr);
+        }
+    }
 }
