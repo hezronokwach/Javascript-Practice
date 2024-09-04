@@ -42,7 +42,7 @@ const reduceRight = (arr, func) => {
 
 
 
-const adder = (a, b) => a + b
-console.log(fold([1, 2, 3], adder, 2))
-console.log(foldRight([1, 2, 3], adder, 2))
-console.log(reduce([1, 2, 3], adder))
+// const adder = (a, b) => a + b
+// console.log(fold([1, 2, 3], adder, 2))
+// console.log(foldRight([1, 2, 3], adder, 2))
+// console.log(reduce([1, 2, 3], adder))
