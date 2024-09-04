@@ -1,12 +1,5 @@
 const adder = (arr, initial) => {
-    if (arr.length === 0) {
-        return initial !== undefined ? initial : 0;
-    }   
-    if (initial !== undefined) {
-        return arr.reduce((acc, curr) => acc + curr, initial);
-    } else {
-        return arr.reduce((acc, curr) => acc + curr);
-    }
+    return arr.reduce((acc, curr) => acc + curr, initial !== undefined ? initial : 0);
 }
 
 const sumOrMul = (arr, initial) => {
