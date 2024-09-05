@@ -13,8 +13,8 @@
 
     import { people } from './get-them-all.data.js'
     import {
-      //getBonannoPisano,
-     // getActive,
+      getBonannoPisano,
+      getActive,
       getArchitects,
       getClassical,
     } from './get-them-all.js'
@@ -47,8 +47,8 @@
     const buttons = [
       { name: 'Architect', action: getArchitects },
       { name: 'Classical', action: getClassical },
-     // { name: 'Active', action: getActive },
-     // { name: 'Bonanno', action: getBonannoPisano },
+      { name: 'Active', action: getActive },
+      { name: 'Bonanno', action: getBonannoPisano },
     ]
 
     buttons.forEach(({ name, action }, i) => {
@@ -73,7 +73,7 @@
         }
 
         others.forEach((o) => {
-          //o.style.opacity = 0.2
+          o.style.opacity = 0.2
         })
 
         btn.className = 'disabled'
