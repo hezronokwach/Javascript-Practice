@@ -1,31 +1,23 @@
 export const getArchitects = () => {
-    let architects = [];
-    let nonArchitects = [];
-    const arch = document.getElementsByTagName('a');
-    architects.push(arch);
-    const nonArch = document.getElementsByTagName('span');
-    nonArchitects.push(nonArch);
-    console.log( [architects,nonArchitects])
+    const architects = Array.from(document.getElementsByTagName('a'));
+    const nonArchitects = Array.from(document.getElementsByTagName('span'));
+    return [architects, nonArchitects];
 }
 
 export const getClassical = () => {
-    let classical = [];
-    let nonclassical = [];
-    const classy = document.getElementsByClassName('.classical');
-    classical.push(classy);
-    const modern = document.getElementsByTagName('.modern');
-    nonclassical.push(modern);
-    const baroque = document.getElementsByTagName('.baroque');
-    nonclassical.push(baroque);
-    return [classical,nonclassical];    
+    const classical = Array.from(document.getElementsByClassName('classical'));
+    const nonClassical = Array.from(document.querySelectorAll('.modern, .baroque'));
+    return [classical, nonClassical];
 }
 
 export const getActive = () => {
-    let active = [];
-    let nonActive = [];
-    const arch = document.querySelectorAll('.classicalactive');
-    active.push(arch);
-    const nonArch = document.getElementsByTagName('span');
-    nonActive.push(nonArch);
-    console.log( [active,nonActive])
+    const active = Array.from(document.getElementsByClassName('active'));
+    const nonActive = Array.from(document.querySelectorAll('a:not(.active), span:not(.active)'));
+    return [active, nonActive];
+}
+
+export const getBonannoPisano = () => {
+    const bonannoPisano = document.getElementById('BonannoPisano');
+    const otherActiveClassical = Array.from(document.querySelectorAll('a.classical.active:not(#BonannoPisano)'));
+    return [bonannoPisano, otherActiveClassical];
 }
