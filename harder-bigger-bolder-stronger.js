@@ -3,7 +3,7 @@ export const generateLetters = () => {
     for (let count = 1; count <= 120; count++) {
         let letters = document.createElement('div');
         letters.textContent = createRandomString();
-        letters.style.fontSize = `${11 + count}px`;
+        letters.style.fontSize = `${10 + count}px`;
         if (count <= 40) {
             letters.style.fontWeight = '300';
         } else if (count > 40 && count <= 80) {
