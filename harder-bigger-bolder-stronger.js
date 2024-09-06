@@ -2,7 +2,7 @@ export const generateLetters = () => {
     let body = document.querySelector('body')
     let count = 0;
     const addLetters = () => {
-        if (count < 120) {
+        if (count <= 120) {
             count++;
             let letters = document.createElement('div');
             letters.textContent = createRandomString();
