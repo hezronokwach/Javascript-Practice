@@ -7,7 +7,7 @@ export const createCircle = (event) => {
     div.style.top = `${event.clientY - 25}px`;
     document.body.appendChild(div);
 }
-document.addEventListener('click',createCircle);
+document.addEventListener('click', createCircle);
 
 export const moveCircle = (event) => {
     const lastCircle = document.querySelector('.circle:last-child');
