@@ -14,17 +14,21 @@ export const moveCircle = (event) => {
     const box = document.querySelector('.box');
     if (lastCircle && box) {
         const boxRect = box.getBoundingClientRect();
-        const newX = event.clientX - 25;
-        const newY = event.clientY - 25;
+        let newX = event.clientX - 25;
+        let newY = event.clientY - 25;
+        
+        // Constrain the circle within the box
+        newX = Math.max(boxRect.left, Math.min(newX, boxRect.right - 50));
+        newY = Math.max(boxRect.top, Math.min(newY, boxRect.bottom - 50));
         
         lastCircle.style.left = `${newX}px`;
         lastCircle.style.top = `${newY}px`;
 
         if (newX >= boxRect.left && newX + 50 <= boxRect.right &&
             newY >= boxRect.top && newY + 50 <= boxRect.bottom) {
-            lastCircle.style.backgroundColor = 'var(--purple)';
+            lastCircle.style.background = 'var(--purple)';
         } else {
-            lastCircle.style.backgroundColor = 'white';
+            lastCircle.style.background = 'white';
         }
     }
 }
