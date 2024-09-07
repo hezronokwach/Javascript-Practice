@@ -12,8 +12,8 @@ document.addEventListener('click',createCircle);
 export const moveCircle = (event) => {
     const lastCircle = document.querySelector('.circle:last-child');
     if (lastCircle) {
-        lastCircle.style.left = `${event.clientX}px`;
-        lastCircle.style.top = `${event.clientY}px`;
+        lastCircle.style.left = `${event.clientX - 25}px`;
+        lastCircle.style.top = `${event.clientY - 25}px`;
     }
 }
 
