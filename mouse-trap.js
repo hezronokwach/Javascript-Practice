@@ -3,11 +3,9 @@ export const createCircle = (event) => {
     div.className = 'circle';
     div.style.backgroundColor = 'white';
     div.style.position = 'absolute';
-    div.style.left = `${event.clientX}px`;
-    div.style.top = `${event.clientY}px`;
+    div.style.left = `${event.clientX - 25}px`;
+    div.style.top = `${event.clientY - 25}px`;
     document.body.appendChild(div);
-    return div;
-
 }
 document.addEventListener('click',createCircle);
 
