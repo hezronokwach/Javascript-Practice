@@ -11,9 +11,21 @@ document.addEventListener('click', createCircle);
 
 export const moveCircle = (event) => {
     const lastCircle = document.querySelector('.circle:last-child');
-    if (lastCircle) {
-        lastCircle.style.left = `${event.clientX - 25}px`;
-        lastCircle.style.top = `${event.clientY - 25}px`;
+    const box = document.querySelector('.box');
+    if (lastCircle && box) {
+        const boxRect = box.getBoundingClientRect();
+        const newX = event.clientX - 25;
+        const newY = event.clientY - 25;
+        
+        lastCircle.style.left = `${newX}px`;
+        lastCircle.style.top = `${newY}px`;
+
+        if (newX >= boxRect.left && newX + 50 <= boxRect.right &&
+            newY >= boxRect.top && newY + 50 <= boxRect.bottom) {
+            lastCircle.style.backgroundColor = 'var(--purple)';
+        } else {
+            lastCircle.style.backgroundColor = 'white';
+        }
     }
 }
 
