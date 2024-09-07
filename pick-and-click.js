@@ -37,7 +37,7 @@ export function pick() {
     const luminosity = Math.round((1 - event.clientY / window.innerHeight) * 100);
     const hslValue = `hsl(${hue}, 50%, ${luminosity}%)`;
 
-    body.style.backgroundColor = hslValue;
+    body.style.background = hslValue;  // Changed from backgroundColor to background
     hslDiv.textContent = hslValue;
     hueDiv.textContent = `hue\n${hue}`;
     luminosityDiv.textContent = `${luminosity}\nluminosity`;
