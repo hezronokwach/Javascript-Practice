@@ -1,85 +1,83 @@
 export function grid() {
-    const body = document.body;
-    const container = document.createElement('div');
-    container.className = 'container';
-    body.appendChild(container);
+    let allChange = document.createElement('div')
+    allChange.className = 'ranges'
+    let width = document.createElement('input')
+    width.className = 'range'
+    width.id = 'width'
+    width.type = 'range'
+    width.value = ''
+    width.min = '200'
+    width.max = '800'
+    width.addEventListener('input', function () {
+        let gos = document.querySelectorAll('.gossip')
+        gos.forEach(e => {
+            e.style.width = width.value + 'px'
+        })
+    })
 
-    // Create form for new gossips
-    const form = document.createElement('div');
-    form.className = 'gossip';
-    const textarea = document.createElement('textarea');
-    const submitButton = document.createElement('button');
-    submitButton.textContent = 'Share gossip!';
-    form.appendChild(textarea);
-    form.appendChild(submitButton);
-    container.appendChild(form);
+    let fontSize = document.createElement('input')
+    fontSize.className = 'range'
+    fontSize.id = 'fontSize'
+    fontSize.type = 'range'
+    fontSize.min = '20'
+    fontSize.max = '40'
+    fontSize.value = ''
+    fontSize.addEventListener('input', function () {
+        let gos = document.querySelectorAll('.gossip')
+        gos.forEach(e => {
+            e.style.fontSize = fontSize.value + 'px'
+        })
+    })
 
-    // Create range inputs
-    const ranges = document.createElement('div');
-    ranges.className = 'ranges';
+    let background = document.createElement('input')
+    background.className = 'range'
+    background.id = 'background'
+    background.type = 'range'
+    background.min = '20'
+    background.max = '75'
+    background.value = ''
+    background.addEventListener('input', function () {
+        let gos = document.querySelectorAll('.gossip')
+        gos.forEach(e => {
+            e.style.background = " hsl(280, 50%," + background.value + "%)"
+        })
+        console.log(background.value)
+    })
 
-    const createRange = (id, min, max) => {
-        const input = document.createElement('input');
-        input.type = 'range';
-        input.id = id;
-        input.className = 'range';
-        input.min = min;
-        input.max = max;
-        ranges.appendChild(input);
-        return input;
-    };
+    allChange.appendChild(width)
+    allChange.appendChild(fontSize)
+    allChange.appendChild(background)
+    document.body.appendChild(allChange)
 
-    const widthRange = createRange('width', 200, 800);
-    const fontSizeRange = createRange('fontSize', 20, 40);
-    const backgroundRange = createRange('background', 20, 75);
+    let share = document.createElement("form")
+    share.className = "gossip"
+    document.body.appendChild(share)
+    let textarea = document.createElement("textarea")
+    textarea.setAttribute("placeholder", "Got a gossip to share?")
+    share.appendChild(textarea)
+    let button = document.createElement("button")
+    button.innerHTML = "Share gossip!"
+    share.appendChild(button)
+    button.addEventListener("click", function () {
+        let val = textarea.value
+        let goss1 = document.createElement('div')
+        goss1.className = "gossip"
+        goss1.textContent = val
+        document.body.insertBefore(goss1, document.querySelectorAll('.gossip')[1])
+        textarea.value = ""
+        event.preventDefault()
+    })
+    addGross(gossips)
 
-    body.appendChild(ranges);
 
-    // Gossip display logic
-    const displayGossip = (gossip) => {
-        const gossipDiv = document.createElement('div');
-        gossipDiv.className = 'gossip';
-        gossipDiv.textContent = gossip;
-        container.appendChild(gossipDiv);
-    };
-
-    // Load initial gossips
-    gossips.forEach(displayGossip);
-
-    // Event listeners
-    submitButton.addEventListener('click', () => {
-        const newGossip = textarea.value.trim();
-        if (newGossip) {
-            const gossipDiv = document.createElement('div');
-            gossipDiv.className = 'gossip';
-            gossipDiv.textContent = newGossip;
-            container.insertBefore(gossipDiv, form);
-            textarea.value = '';
-        }
-    });
-
-    const updateStyles = () => {
-        const width = widthRange.value;
-        const fontSize = fontSizeRange.value;
-        const background = backgroundRange.value;
-
-        document.querySelectorAll('.gossip').forEach(gossip => {
-            gossip.style.width = `${width}px`;
-            gossip.style.fontSize = `${fontSize}px`;
-            gossip.style.background = `hsl(280, 50%, ${background}%)`;
-        });
-    };
-
-    [widthRange, fontSizeRange, backgroundRange].forEach(range => {
-        range.addEventListener('input', updateStyles);
-    });
-
-    widthRange.addEventListener('input', function () {
-        this.value = this.min;
-        updateStyles();
-    });
-    // Initial style application
-    updateStyles();
+}
+function addGross(goss) {
+    goss.forEach(elem => {
+        let goss = document.createElement('div')
+        goss.className = "gossip"
+        goss.innerHTML = elem
+        document.body.appendChild(goss)
+    })
 }
 
 export const gossips = [
