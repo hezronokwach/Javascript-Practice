@@ -3,7 +3,8 @@ export function explore() {
 
         let section = document.createElement("section")
         section.style.backgroundImage = "url(./where-do-we-go_images/" + places[i].name.split(',')[0].toLowerCase().split(' ').join('-') + ".jpg)";
-        section.style.backgroundSize = "100%"; section.className = "location"
+        section.style.backgroundSize = "100%"; 
+        section.className = "location"
         let link = document.createElement('a')
         link.innerHTML = places[i].name + places[i].coordinates
         link.style.color = places[i].color
