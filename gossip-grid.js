@@ -58,17 +58,17 @@ submitButton.addEventListener('click', () => {
   }
 });
 
-  const updateStyles = () => {
-    const width = widthRange.value;
-    const fontSize = fontSizeRange.value;
-    const background = backgroundRange.value;
-    
-    document.querySelectorAll('.gossip').forEach(gossip => {
-      gossip.style.width = `${width}px`;
-      gossip.style.fontSize = `${fontSize}px`;
-      gossip.style.background = `hsl(280, 50%, ${background}%)`;
-    });
-  };
+const updateStyles = () => {
+  const width = widthRange.value;
+  const fontSize = fontSizeRange.value;
+  const background = backgroundRange.value;
+  
+  document.querySelectorAll('.gossip').forEach(gossip => {
+    gossip.style.width = `${width}px`;
+    gossip.style.fontSize = `${fontSize}px`;
+    gossip.style.background = `hsl(280, 50%, ${background}%)`;
+  });
+};
 
   [widthRange, fontSizeRange, backgroundRange].forEach(range => {
     range.addEventListener('input', updateStyles);
