@@ -1,81 +1,85 @@
 export function grid() {
-  const body = document.body;
-  const container = document.createElement('div');
-  container.className = 'container';
-  body.appendChild(container);
+    const body = document.body;
+    const container = document.createElement('div');
+    container.className = 'container';
+    body.appendChild(container);
 
-  // Create form for new gossips
-  const form = document.createElement('div');
-  form.className = 'gossip';
-  const textarea = document.createElement('textarea');
-  const submitButton = document.createElement('button');
-  submitButton.textContent = 'Share gossip!';
-  form.appendChild(textarea);
-  form.appendChild(submitButton);
-  container.appendChild(form);
+    // Create form for new gossips
+    const form = document.createElement('div');
+    form.className = 'gossip';
+    const textarea = document.createElement('textarea');
+    const submitButton = document.createElement('button');
+    submitButton.textContent = 'Share gossip!';
+    form.appendChild(textarea);
+    form.appendChild(submitButton);
+    container.appendChild(form);
 
-  // Create range inputs
-  const ranges = document.createElement('div');
-  ranges.className = 'ranges';
-  
-  const createRange = (id, min, max) => {
-    const input = document.createElement('input');
-    input.type = 'range';
-    input.id = id;
-    input.className = 'range';
-    input.min = min;
-    input.max = max;
-    ranges.appendChild(input);
-    return input;
-  };
+    // Create range inputs
+    const ranges = document.createElement('div');
+    ranges.className = 'ranges';
 
-  const widthRange = createRange('width', 200, 800);
-  const fontSizeRange = createRange('fontSize', 20, 40);
-  const backgroundRange = createRange('background', 20, 75);
+    const createRange = (id, min, max) => {
+        const input = document.createElement('input');
+        input.type = 'range';
+        input.id = id;
+        input.className = 'range';
+        input.min = min;
+        input.max = max;
+        ranges.appendChild(input);
+        return input;
+    };
 
-  body.appendChild(ranges);
+    const widthRange = createRange('width', 200, 800);
+    const fontSizeRange = createRange('fontSize', 20, 40);
+    const backgroundRange = createRange('background', 20, 75);
 
-  // Gossip display logic
-  const displayGossip = (gossip) => {
-    const gossipDiv = document.createElement('div');
-    gossipDiv.className = 'gossip';
-    gossipDiv.textContent = gossip;
-    container.appendChild(gossipDiv);
-  };
+    body.appendChild(ranges);
 
-  // Load initial gossips
-  gossips.forEach(displayGossip);
+    // Gossip display logic
+    const displayGossip = (gossip) => {
+        const gossipDiv = document.createElement('div');
+        gossipDiv.className = 'gossip';
+        gossipDiv.textContent = gossip;
+        container.appendChild(gossipDiv);
+    };
 
-  // Event listeners
-submitButton.addEventListener('click', () => {
-  const newGossip = textarea.value.trim();
-  if (newGossip) {
-    const gossipDiv = document.createElement('div');
-    gossipDiv.className = 'gossip';
-    gossipDiv.textContent = newGossip;
-    container.insertBefore(gossipDiv, form);
-    textarea.value = '';
-  }
-});
+    // Load initial gossips
+    gossips.forEach(displayGossip);
 
-const updateStyles = () => {
-  const width = widthRange.value;
-  const fontSize = fontSizeRange.value;
-  const background = backgroundRange.value;
-  
-  document.querySelectorAll('.gossip').forEach(gossip => {
-    gossip.style.width = `${width}px`;
-    gossip.style.fontSize = `${fontSize}px`;
-    gossip.style.background = `hsl(280, 50%, ${background}%)`;
-  });
-};
+    // Event listeners
+    submitButton.addEventListener('click', () => {
+        const newGossip = textarea.value.trim();
+        if (newGossip) {
+            const gossipDiv = document.createElement('div');
+            gossipDiv.className = 'gossip';
+            gossipDiv.textContent = newGossip;
+            container.insertBefore(gossipDiv, form);
+            textarea.value = '';
+        }
+    });
 
-  [widthRange, fontSizeRange, backgroundRange].forEach(range => {
-    range.addEventListener('input', updateStyles);
-  });
+    const updateStyles = () => {
+        const width = widthRange.value;
+        const fontSize = fontSizeRange.value;
+        const background = backgroundRange.value;
 
-  // Initial style application
-  updateStyles();
+        document.querySelectorAll('.gossip').forEach(gossip => {
+            gossip.style.width = `${width}px`;
+            gossip.style.fontSize = `${fontSize}px`;
+            gossip.style.background = `hsl(280, 50%, ${background}%)`;
+        });
+    };
+
+    [widthRange, fontSizeRange, backgroundRange].forEach(range => {
+        range.addEventListener('input', updateStyles);
+    });
+
+    widthRange.addEventListener('input', () => {
+        updateStyles();
+    });
+
+    // Initial style application
+    updateStyles();
 }
 
 export const gossips = [
@@ -96,5 +100,4 @@ export const gossips = [
     `The 18 most bitter real housewives feuds`,
     `Tristan Thompson's remarkable transformation from skinny teen to hulking NBA ace`,
     `Kim Kardashian 'considers leaving home' with Kanye West to 'save marriage'`,
-  ]
-  
+]
