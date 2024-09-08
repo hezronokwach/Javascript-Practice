@@ -1,17 +1,17 @@
 export function explore() {
     for (let i = 0; i < places.length; i++) {
-
         let section = document.createElement("section")
-        section.style.backgroundImage = "url(./where-do-we-go_images/" + places[i].name.split(',')[0].toLowerCase().split(' ').join('-') + ".jpg)";
-        section.style.backgroundSize = "100%"; 
+        let imageName = places[i].name.split(',')[0].toLowerCase().replace(/ /g, '-')
+        section.style.backgroundImage = `url('./where-do-we-go_images/${imageName}.jpg')`
+        section.style.backgroundSize = "cover"
+        section.style.backgroundPosition = "center"
         section.className = "location"
         let link = document.createElement('a')
-        link.innerHTML = places[i].name + places[i].coordinates
+        link.innerHTML = places[i].name + '<br>' + places[i].coordinates
         link.style.color = places[i].color
         section.appendChild(link)
         document.body.appendChild(section)
     }
-    console.log(places[2].name.split(',')[0].toLowerCase().split(' ').join('-'))
 }
 export const places = [
     {
