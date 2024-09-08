@@ -2,7 +2,8 @@ export function explore() {
     for (let i = 0; i < places.length; i++) {
 
         let section = document.createElement("section")
-        section.style.backgroundImage = `url('https://public.01-edu.org/subjects/where-do-we-go/where-do-we-go_images/${places[i].name.split(',')[0].toLowerCase().split(' ').join('-')}.jpg')`; section.style.backgroundSize = "100%"
+        section.style.backgroundImage = `url('https://public.01-edu.org/subjects/where-do-we-go/where-do-we-go_images/${places[i].name.split(',')[0].toLowerCase().replace(/ /g, '-')}.jpg')`;
+        section.style.backgroundSize = "100%"
         section.className = "location"
         let link = document.createElement('a')
         link.innerHTML = places[i].name + places[i].coordinates
