@@ -47,13 +47,16 @@ export function grid() {
   gossips.forEach(displayGossip);
 
   // Event listeners
-  submitButton.addEventListener('click', () => {
-    const newGossip = textarea.value.trim();
-    if (newGossip) {
-      displayGossip(newGossip);
-      textarea.value = '';
-    }
-  });
+submitButton.addEventListener('click', () => {
+  const newGossip = textarea.value.trim();
+  if (newGossip) {
+    const gossipDiv = document.createElement('div');
+    gossipDiv.className = 'gossip';
+    gossipDiv.textContent = newGossip;
+    container.insertBefore(gossipDiv, form);
+    textarea.value = '';
+  }
+});
 
   const updateStyles = () => {
     const width = widthRange.value;
