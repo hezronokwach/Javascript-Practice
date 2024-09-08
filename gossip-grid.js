@@ -74,10 +74,10 @@ export function grid() {
         range.addEventListener('input', updateStyles);
     });
 
-    widthRange.addEventListener('input', () => {
+    widthRange.addEventListener('input', function () {
+        this.value = this.min;
         updateStyles();
     });
-
     // Initial style application
     updateStyles();
 }
