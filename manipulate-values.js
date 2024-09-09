@@ -1,5 +1,5 @@
 const filterValues = (obj, func) =>{
-    result = {};
+    let result = {};
     for (const [key, value] of Object.entries(obj)) {
         if (func(value)) result[key] = value;
     }
@@ -7,7 +7,7 @@ const filterValues = (obj, func) =>{
 }
 
 const mapValues = (obj, func) =>{
-    result = {};
+    let result = {};
     for (const [key, value] of Object.entries(obj)) {
         result[key] = func(value);
     }
