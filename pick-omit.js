@@ -13,7 +13,7 @@ const omit = (obj, key) => {
     const result = {};
     const keys = Array.isArray(key) ? key : [key];
     for (let k in obj) {
-        if (!keys.includes(k)) {
+        if (Object.hasOwnProperty.call(obj, k) && !keys.includes(k)) {
             result[k] = obj[k];
         }
     }
