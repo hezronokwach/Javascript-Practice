@@ -1,18 +1,20 @@
-const pick = (obj, [...arr]) => {
+const pick = (obj, key) => {
     const result = {};
-    for (let key of arr) {
-        if (key in obj) {
-            result[key] = obj[key];
+    const keys = Array.isArray(key) ? key : [key];
+    for (let k of keys) {
+        if (k in obj) {
+            result[k] = obj[k];
         }
     }
     return result;
 }
 
-const omit = (obj, [...arr]) => {
+const omit = (obj, key) => {
     const result = {};
-    for (let key in obj) {
-        if (!arr.includes(key)) {
-            result[key] = obj[key];
+    const keys = Array.isArray(key) ? key : [key];
+    for (let k in obj) {
+        if (!keys.includes(k)) {
+            result[k] = obj[k];
         }
     }
     return result;
