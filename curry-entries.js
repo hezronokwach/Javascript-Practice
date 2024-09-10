@@ -10,11 +10,7 @@ const reduceCurry = (func) => {
 
 const defaultCurry = (obj1) => {
     return function (obj2) {
-        let result = { ...obj1 };
-        for (const [key, value] in Object.entries(obj2)) {
-            result[key] = value;
-        }
-        return result;
+        return { ...obj1, ...obj2 };
     }
 }
 
