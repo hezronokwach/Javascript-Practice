@@ -34,25 +34,22 @@ const reduceEntries = (obj, func, initial) => {
     return acc;
 };
 
-const totalCalories =(cart) =>{
-    return reduceEntries(cart,(total,[item,amount])=> total+ nutritionDB[item].calories *amount,0)
-}
+const totalCalories = (cart) => {
+    return reduceEntries(cart, (total, [item, amount]) => 
+        total + nutritionDB[item].calories * amount / 100, 0);
+};
 
 const lowCarbs = (cart) => {
-    return filterEntries(cart, ([item, amount]) => {
-        const carbsPerServing = nutritionDB[item].carbs;
-        return carbsPerServing < 50;
-    });
-}
+    return filterEntries(cart, ([item, amount]) => 
+        nutritionDB[item].carbs * amount / 100 < 50);
+};
 
 const cartTotal = (cart) => {
-    return reduceEntries(cart, (total, [item, amount]) => {
-        for (let nutrient in nutritionDB[item]) {
-            if (!(nutrient in total)) {
-                total[nutrient] = 0;
-            }
-            total[nutrient] += nutritionDB[item][nutrient] * amount;
+    return mapEntries(cart, ([item, amount]) => {
+        const itemTotal = {};
+        for (const nutrient in nutritionDB[item]) {
+            itemTotal[nutrient] = nutritionDB[item][nutrient] * amount / 100;
         }
-        return total;
-    }, {});
+        return [item, itemTotal];
+    });
 };
