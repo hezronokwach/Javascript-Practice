@@ -35,8 +35,8 @@ const reduceEntries = (obj, func, initial) => {
 };
 
 const totalCalories = (cart) => {
-    return reduceEntries(cart, (total, [item, amount]) => 
-        total + nutritionDB[item].calories * amount / 100, 0);
+    return Number(reduceEntries(cart, (total, [item, amount]) => 
+        total + nutritionDB[item].calories * amount / 100, 0).toFixed(1));
 };
 
 const lowCarbs = (cart) => {
