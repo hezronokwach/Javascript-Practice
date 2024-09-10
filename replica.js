@@ -5,11 +5,10 @@ function replica(target, ...sources) {
                 if (source[key] instanceof RegExp) {
                     target[key] = new RegExp(source[key]);
                 } else if (source[key] !== null && typeof source[key] === 'object') {
-                    if (Array.isArray(source[key]) !== Array.isArray(target[key])) {
-                        target[key] = replica(Array.isArray(source[key]) ? [] : {}, source[key]);
-                    } else {
-                        target[key] = replica(target[key] || (Array.isArray(source[key]) ? [] : {}), source[key]);
+                    if (typeof target[key] !== 'object' || target[key] === null) {
+                        target[key] = Array.isArray(source[key]) ? [] : {};
                     }
+                    target[key] = replica(target[key], source[key]);
                 } else {
                     target[key] = source[key];
                 }
