@@ -32,7 +32,6 @@ const reduceEntries = (obj, func, initial) => {
         acc = func(acc, entries[i]);
     }
     return acc;
-    return acc;
 };
 
 const totalCalories =(cart) =>{
@@ -40,7 +39,7 @@ const totalCalories =(cart) =>{
 }
 
 const lowCarbs =(cart) =>{
-    return filterEntries(cart,(total,[item,amount])=> nutritionDB[item].calories *amount < 50)
+    return filterEntries(cart,(total,[item,amount])=> nutritionDB[item].carbs *amount < 50)
 } 
 
 const cartTotal = (cart) => {
