@@ -48,7 +48,7 @@ const cartTotal = (cart) => {
     return mapEntries(cart, ([item, amount]) => {
         const itemTotal = {};
         for (const nutrient in nutritionDB[item]) {
-            itemTotal[nutrient] = nutritionDB[item][nutrient] * amount / 100;
+            itemTotal[nutrient] = Number((nutritionDB[item][nutrient] * amount / 100).toFixed(3));
         }
         return [item, itemTotal];
     });
