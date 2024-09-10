@@ -42,6 +42,7 @@ const lowCarbs = (cart) => {
     return filterEntries(cart, ([item, amount]) => {
         const carbsPerServing = nutritionDB[item].carbs;
         const totalCarbs = carbsPerServing * amount;
+        console.log(`${item}: ${totalCarbs} carbs`);
         return totalCarbs < 50;
     });
 }
