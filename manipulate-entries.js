@@ -38,9 +38,13 @@ const totalCalories =(cart) =>{
     return reduceEntries(cart,(total,[item,amount])=> total+ nutritionDB[item].calories *amount,0)
 }
 
-const lowCarbs =(cart) =>{
-return filterEntries(cart, ([item, amount]) => nutritionDB[item].carbs * amount < 50)
-} 
+const lowCarbs = (cart) => {
+    return filterEntries(cart, ([item, amount]) => {
+        const carbsPerServing = nutritionDB[item].carbs;
+        const totalCarbs = carbsPerServing * amount;
+        return totalCarbs < 50;
+    });
+}
 
 const cartTotal = (cart) => {
     return reduceEntries(cart, (total, [item, amount]) => {
