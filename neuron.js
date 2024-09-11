@@ -1,4 +1,5 @@
 const neuron = (arr) => {
+    if (arr.length === 0) return {};
     let result = { questions: {}, orders: {} };
 
     for (let item of arr) {
