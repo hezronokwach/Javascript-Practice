@@ -1,42 +1,35 @@
 const flags = (obj) => {
     let output = { alias: {}, description: "" }
     let flagDescription = {}
-    let ali
+    
     for (let key in obj) {
-        ali = Alias(key);
-        output.alias[ali] = key
+        output.alias[Alias(key)] = key
         if (key !== 'help') {
             flagDescription[key] = obj[key]
         }
     }
-    if (!Array.from(Object.keys(obj)).includes('help') || obj.help === '') {
+    
+    if (!obj.hasOwnProperty('help') || obj.help === '') {
         output.description = Object.entries(flagDescription)
-            .map(([key, desc]) => `-${Alias(key)}, --${key}: ${desc}`)            
-    } else if (Array.isArray(obj.help)){
-        output.description = Object.entries(flagDescription)
-            .map(([key, desc]) => `-${Alias(obj.help)}, --${obj.help}: ${desc}`)  
-
+            .map(([key, desc]) => `-${Alias(key)}, --${key}: ${desc}`)
+            .join('')
+    } else if (Array.isArray(obj.help)) {
+        output.description = obj.help.map(key => 
+            `-${Alias(key)}, --${key}: ${flagDescription[key]}`
+        ).join('')
     }
+    
     return output
-
 }
 
 function Alias(word) {
-    let result = ""
-    if (word === 'multiply') {
-        return 'm'
-    } else if (word === 'divide') {
-        return 'd'
-    } else if (word === 'help') {
-        return 'h'
-    }
-
+    return word.charAt(0).toLowerCase()
 }
 
 
-console.log(flags({
-    multiply: 'multiply the values',
-    divide: 'divides the values',
-    help : ['divide']
-}
-))
+console.log( flags({
+    invert: 'inverts and object',
+    'convert-map': 'converts the object to an array',
+    assign: 'uses the function assign - assign to target object',
+    help: ['assign', 'invert'],
+  }))
