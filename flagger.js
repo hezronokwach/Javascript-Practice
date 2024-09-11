@@ -1,5 +1,5 @@
 const flags = (obj) => {
-    let output = { alias: {}, description: "" }
+    let output = { alias: { h: 'help' }, description: "" }
     let flagDescription = {}
     
     for (let key in obj) {
