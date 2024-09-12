@@ -1,14 +1,13 @@
 const throttle = (func, wait) => {
-    let lastCall = 0
-    return function(...args){
-        let current = Date.now();
-        if((current - lastCall) >= wait){
-            func.apply(this, args)
-            lastCall = current
+    let lastCall = 0;
+    return function(...args) {
+        const current = Date.now();
+        if ((current - lastCall) >= wait) {
+            func.apply(this, args);
+            lastCall = current;
         }
-
-    }
-}
+    };
+};
 
 const opThrottle = (func, wait, options = {}) => {
     let lastCall = 0;
