@@ -2,9 +2,10 @@ const throttle = (func, wait) => {
     let lastCall = 0;
     return function(...args) {
         const current = Date.now();
-        if ((current - lastCall) >= wait) {
-            func.apply(this, args);
+        if (current - lastCall >= wait) {
+            const result = func.apply(this, args);
             lastCall = current;
+            return result;
         }
     };
 };
