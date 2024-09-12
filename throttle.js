@@ -12,25 +12,27 @@ const throttle = (func, wait) => {
 
 const opThrottle = (func, wait, options = {}) => {
     let lastCall = 0;
-    let lastArgs = null;
     let timer = null;
 
     return function (...args) {
         const current = Date.now();
 
-        if (options.leading && lastCall === 0) {
+        if (!lastCall && options.leading === false) {
+            lastCall = current;
+        }
+
+        if (current - lastCall >= wait) {
+            if (timer) {
+                clearTimeout(timer);
+                timer = null;
+            }
             func.apply(this, args);
             lastCall = current;
-        } else if (current - lastCall >= wait) {
-            func.apply(this, args);
-            lastCall = current;
-        } else if (options.trailing) {
-            clearTimeout(timer);
+        } else if (!timer && options.trailing !== false) {
             timer = setTimeout(() => {
-                if (current - lastCall >= wait) {
-                    func.apply(this, args);
-                    lastCall = Date.now();
-                }
+                func.apply(this, args);
+                lastCall = Date.now();
+                timer = null;
             }, wait - (current - lastCall));
         }
     };
