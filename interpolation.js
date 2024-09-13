@@ -4,16 +4,16 @@ function interpolation(obj) {
     let end = obj.end
     let callback = obj.callback
     let duration = obj.duration
-    interval = duration/step
-    let decrement = (end - start)/step
-  for (let i = 0; i < step; i++) {
-    let distance = start + (i * decrement)
-    let time = i * interval
-    
-    setTimeout(() => {
-        callback([distance, time])
-    }, time)
-}
+    let interval = duration / step
+    let decrement = (end - start) / step
+    for (let i = 0; i < step - 1; i++) {
+        let distance = start + (i * decrement)
+        let time = i * interval
+
+        setTimeout(() => {
+            callback([distance, time])
+        }, time)
+    }
 }
 interpolation({
     step: 5,
