@@ -23,5 +23,5 @@ async function some(promises, count) {
         .map(result => result.value)
         .slice(0, count);
 
-    return fulfilled.length === 1 ? fulfilled[0] : fulfilled;
+    return fulfilled;
 }
