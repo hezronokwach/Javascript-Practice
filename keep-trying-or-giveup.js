@@ -5,8 +5,8 @@ function retry(count, callback) {
                 return callback(...args)
             }
             catch (error) {
-                if (i === count - 1) {
-                    throw new Error('All attempts failed');
+                if (i === count) {
+                    throw error;
                 }
             }
 
