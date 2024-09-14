@@ -1,23 +1,8 @@
-async function getJSON(path, params = null) {
-    let constructedUrl = path;
-    if (params !== null) {
-        const searchParams = new URLSearchParams(params);
-        constructedUrl += '?' + searchParams.toString();
-    }
-    
-    let response = await fetch(constructedUrl);
-    
-    if (!response.ok) {
-        throw new Error(response.statusText);
-    }
-    
-    let parsedBody = await response.json();
-    
-    if ('error' in parsedBody) {
-        throw new Error(parsedBody.error);
-    } else if ('data' in parsedBody) {
-        return parsedBody.data;
-    } else {
-        throw new Error('Invalid response format');
-    }
+async function getJSON(path, params = {}) {
+    const url = path + '?' + new URLSearchParams(params);
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(response.statusText);
+    const data = await response.json();
+    if (data.error) throw new Error(data.error);
+    return data.data;
 }
