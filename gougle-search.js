@@ -1,27 +1,18 @@
-function queryServers(serverName, q) {
-    const url1 = `/${serverName}?q=${encodeURIComponent(q)}`;
-    const url2 = `/${serverName}_backup?q=${encodeURIComponent(q)}`;
-    
-    return Promise.race([getJSON(url1), getJSON(url2)]);
-}
-
 async function gougleSearch(q) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 80);
+    const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('timeout')), 80)
+    );
+    
+    const queries = Promise.all([
+        queryServers('web', q),
+        queryServers('image', q),
+        queryServers('video', q)
+    ]);
 
     try {
-        const [web, image, video] = await Promise.all([
-            queryServers('web', q),
-            queryServers('image', q),
-            queryServers('video', q)
-        ]);
-
-        clearTimeout(timeout);
+        const [web, image, video] = await Promise.race([timeout, queries]);
         return { web, image, video };
     } catch (error) {
-        if (error.name === 'AbortError') {
-            throw new Error('timeout');
-        }
         throw error;
     }
 }
