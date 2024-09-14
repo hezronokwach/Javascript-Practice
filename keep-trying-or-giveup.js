@@ -1,15 +1,13 @@
 function retry(count, callback) {
-    return function (...args) {
+    return async function (...args) {
         for (let i = 0; i <= count; i++) {
             try {
-                return callback(...args)
-            }
-            catch (error) {
+                return await callback(...args);
+            } catch (error) {
                 if (i === count) {
                     throw error;
                 }
             }
-
         }
     }
 }
