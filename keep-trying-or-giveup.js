@@ -1,6 +1,6 @@
 function retry(count, callback) {
     return function (...args) {
-        for (let i = 0; i < count; i++) {
+        for (let i = 0; i <= count; i++) {
             try {
                 return callback(...args)
             }
