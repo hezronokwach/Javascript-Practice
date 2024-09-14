@@ -11,17 +11,18 @@ async function some(promises, count) {
         return [];
     }
 
-    const results = await Promise.all(
-        promises.map(p => Promise.resolve(p).then(
-            value => ({ status: 'fulfilled', value }),
-            reason => ({ status: 'rejected', reason })
-        ))
-    );
+    return new Promise((resolve) => {
+        const results = [];
+        let fulfilled = 0;
 
-    const fulfilled = results
-        .filter(result => result.status === 'fulfilled')
-        .map(result => result.value)
-        .slice(0, count);
-
-    return fulfilled;
+        promises.forEach((promise) => {
+            Promise.resolve(promise).then((value) => {
+                results.push(value);
+                fulfilled++;
+                if (fulfilled === count) {
+                    resolve(results);
+                }
+            }).catch(() => {});
+        });
+    });
 }
