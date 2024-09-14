@@ -1,7 +1,8 @@
 async function getJSON(path, params = null) {
     let constructedUrl = path;
     if (params !== null) {
-        constructedUrl += '?' + new URLSearchParams(params).toString();
+        const searchParams = new URLSearchParams(params);
+        constructedUrl += '?' + searchParams.toString();
     }
     
     let response = await fetch(constructedUrl);
