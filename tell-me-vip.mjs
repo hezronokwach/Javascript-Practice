@@ -20,13 +20,12 @@ try {
     result.sort()
     //  console.log(result)
     for (let i = 0; i < result.length; i++) {
-        
-        list +=(`${i + 1}. ${result[i]}`) + "\n"
+        list += `${i + 1}. ${result[i]}`;
+        if (i < result.length - 1) {
+            list += "\n";
+        }
     }
-    writeFile('vip.txt',list )
-
-    //list += result.slice(result.length-1)
-    //console.log(list)
+    writeFile('vip.txt', list)
 } catch (err) {
     console.error(err);
 }
@@ -39,7 +38,6 @@ function split(arr) {
         store[1] = store[1].slice(0, -5)
         let conc = store[1] + " " + store[0]
         result.push(conc)
-
     }
     return result
 }
