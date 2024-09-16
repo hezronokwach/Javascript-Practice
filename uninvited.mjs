@@ -13,13 +13,17 @@ const server = createServer((request, response) => {
             try {
                 const jsonContent = JSON.parse(body);
                 writeFile(`guests/${guestName}.json`, JSON.stringify(jsonContent), (err) => {
-                    response.statusCode = 201;
-                    response.end(JSON.stringify(jsonContent));
+                    if (err) {
+                        response.statusCode = 500;
+                        response.end(JSON.stringify({ error: "server failed" }));
+                    } else {
+                        response.statusCode = 201;
+                        response.end(JSON.stringify(jsonContent));
+                    }
                 });
             } catch (error) {
-                console.error('Error processing request:', error);
                 response.statusCode = 400;
-                response.end(JSON.stringify({ error: "Invalid JSON", details: error.message }));
+                response.end(JSON.stringify({ error: "Invalid JSON" }));
             }
         });
     } else {
