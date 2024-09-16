@@ -14,6 +14,7 @@ const server = createServer((request, response) => {
                 const jsonContent = JSON.parse(body);
                 writeFile(`guests/${guestName}.json`, JSON.stringify(jsonContent), (err) => {
                     if (err) {
+                        console.error('Error writing file:', err);
                         response.statusCode = 500;
                         response.end(JSON.stringify({ error: "server failed" }));
                     } else {
@@ -22,6 +23,7 @@ const server = createServer((request, response) => {
                     }
                 });
             } catch (error) {
+                console.error('Error parsing JSON:', error);
                 response.statusCode = 400;
                 response.end(JSON.stringify({ error: "Invalid JSON" }));
             }
