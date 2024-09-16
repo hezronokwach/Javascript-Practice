@@ -5,8 +5,8 @@ let filePath=argv[2]
 let files
 try {
     files = await readdir(filePath);
-    files.sort()
     let result = split(files)
+    result.sort()
   //  console.log(result)
     for (let i = 0; i < result.length; i++) {
         console.log(`${i+1}. ${result[i]}`)
