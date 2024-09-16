@@ -13,13 +13,8 @@ const server = createServer((request, response) => {
             try {
                 const jsonContent = JSON.parse(body);
                 writeFile(`guests/${guestName}.json`, JSON.stringify(jsonContent), (err) => {
-                    if (err) {
-                        response.statusCode = 500;
-                        response.end(JSON.stringify({ error: "server failed" }));
-                    } else {
-                        response.statusCode = 201;
-                        response.end(JSON.stringify(jsonContent));
-                    }
+                    response.statusCode = 201;
+                    response.end(JSON.stringify(jsonContent));
                 });
             } catch (error) {
                 response.statusCode = 400;
