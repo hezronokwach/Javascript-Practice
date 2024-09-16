@@ -9,11 +9,11 @@ function myDisco(word) {
     let middle = Math.ceil(word.length / 2);
     let first = word.slice(0, middle);
     let end = word.slice(middle);
-    return end + first;
+    return end +  first;
 }
 
 function processInput(input) {
-    return input.map(word => myDisco(word)).join(' ');
+    return input[0].split(' ').map(word => myDisco(word)).join(' ');
 }
 
 console.log(processInput(args));
