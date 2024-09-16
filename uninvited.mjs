@@ -17,8 +17,9 @@ const server = createServer((request, response) => {
                     response.end(JSON.stringify(jsonContent));
                 });
             } catch (error) {
+                console.error('Error processing request:', error);
                 response.statusCode = 400;
-                response.end(JSON.stringify({ error: "Invalid JSON" }));
+                response.end(JSON.stringify({ error: "Invalid JSON", details: error.message }));
             }
         });
     } else {
