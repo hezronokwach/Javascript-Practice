@@ -2,39 +2,58 @@ import { createServer } from 'node:http';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 
-let port = 5000;
+const port = 5000;
 
 const server = createServer(async (request, response) => {
     if (request.method === 'POST') {
-        if (request.headers.authorization) {
-            const [username, password] = Buffer.from(request.headers.authorization.split(' ')[1], 'base64').toString().split(':');
-            const authorizedUsers = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
-            if (authorizedUsers.includes(username) && password === 'abracadabra') {
-                const guestName = request.url.slice(1);
-                const filePath = join('guests', `${guestName}.json`);
-                let body = '';
+        const authHeader = request.headers.authorization;
 
-                request.on('data', chunk => body += chunk.toString());
-
-                request.on('end', async () => {
-                    try {
-                        await mkdir('guests', { recursive: true }); // Ensure directory exists
-                        await writeFile(filePath, body, 'utf8');
-                        response.writeHead(200, { 'Content-Type': 'application/json' });
-                        response.end(JSON.stringify(JSON.parse(body)));
-                    } catch (err) {
-                        response.writeHead(500, { 'Content-Type': 'application/json' });
-                        response.end(JSON.stringify({ error: 'server failed' }));
-                    }
-                });
-            } else {
-                response.writeHead(401, { 'Content-Type': 'text/plain' });
-                response.end(JSON.stringify('Authorization Required'));
-            }
-        } else {
-            response.writeHead(401, { 'Content-Type': 'text/plain' });
-            response.end(JSON.stringify('Authorization Required'));
+        // Check for authorization header
+        if (!authHeader) {
+            response.writeHead(401, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify({ error: 'Authorization Required' }));
+            return;
         }
+
+        // Decode credentials
+        const [type, credentials] = authHeader.split(' ');
+        if (type !== 'Basic') {
+            response.writeHead(401, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify({ error: 'Authorization Required' }));
+            return;
+        }
+
+        const [username, password] = Buffer.from(credentials, 'base64').toString().split(':');
+        const authorizedUsers = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
+
+        // Validate credentials
+        if (!authorizedUsers.includes(username) || password !== 'abracadabra') {
+            response.writeHead(401, { 'Content-Type': 'application/json' });
+            response.end(JSON.stringify({ error: 'Authorization Required' }));
+            return;
+        }
+
+        // Handle valid request
+        const guestName = request.url.slice(1);
+        const filePath = join('guests', `${guestName}.json`);
+        let body = '';
+
+        request.on('data', chunk => body += chunk.toString());
+
+        request.on('end', async () => {
+            try {
+                await mkdir('guests', { recursive: true }); // Ensure directory exists
+                await writeFile(filePath, body, 'utf8');
+                response.writeHead(200, { 'Content-Type': 'application/json' });
+                response.end(body); // Return the stored content as JSON
+            } catch (err) {
+                response.writeHead(500, { 'Content-Type': 'application/json' });
+                response.end(JSON.stringify({ error: 'Server failed to process request' }));
+            }
+        });
+    } else {
+        response.writeHead(405, { 'Content-Type': 'application/json' });
+        response.end(JSON.stringify({ error: 'Method Not Allowed' }));
     }
 });
 
