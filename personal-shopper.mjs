@@ -70,9 +70,7 @@ const remove = async (filename, item, quantity) => {
             await writeFile(filename, JSON.stringify(json, null, 2));
             console.log(`Removed ${quantity || 'all'} ${item}(s) from the list`);
         } else {
-            json[item] = Math.abs(parseInt(quantity)) || 1;
-            await writeFile(filename, JSON.stringify(json, null, 2));
-            console.log(`Added ${Math.abs(parseInt(quantity)) || 1} ${item}(s) to the list`);
+            console.log(`${item} not found in the list`);
         }
     } catch (err) {
         console.error("Error updating file:", err);
