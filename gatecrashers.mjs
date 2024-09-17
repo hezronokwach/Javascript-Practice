@@ -8,14 +8,13 @@ const server = createServer(async (request, response) => {
     if (request.method === 'POST') {
         const authHeader = request.headers.authorization;
 
-        // Check for authorization header
+        // Authorization check
         if (!authHeader) {
             response.writeHead(401, { 'Content-Type': 'application/json' });
             response.end(JSON.stringify({ error: 'Authorization Required' }));
             return;
         }
 
-        // Decode credentials
         const [type, credentials] = authHeader.split(' ');
         if (type !== 'Basic') {
             response.writeHead(401, { 'Content-Type': 'application/json' });
@@ -26,14 +25,12 @@ const server = createServer(async (request, response) => {
         const [username, password] = Buffer.from(credentials, 'base64').toString().split(':');
         const authorizedUsers = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
 
-        // Validate credentials
         if (!authorizedUsers.includes(username) || password !== 'abracadabra') {
             response.writeHead(401, { 'Content-Type': 'application/json' });
             response.end(JSON.stringify({ error: 'Authorization Required' }));
             return;
         }
 
-        // Handle valid request
         const guestName = request.url.slice(1);
         const filePath = join('guests', `${guestName}.json`);
         let body = '';
@@ -42,16 +39,19 @@ const server = createServer(async (request, response) => {
 
         request.on('end', async () => {
             try {
-                await mkdir('guests', { recursive: true }); // Ensure directory exists
+                await mkdir('guests', { recursive: true });
                 await writeFile(filePath, body, 'utf8');
+                console.log(`Writing to ${filePath}: ${body}`);
                 response.writeHead(200, { 'Content-Type': 'application/json' });
-                response.end(body); // Return the stored content as JSON
+                response.end(body);
             } catch (err) {
+                console.error(err);
                 response.writeHead(500, { 'Content-Type': 'application/json' });
                 response.end(JSON.stringify({ error: 'Server failed to process request' }));
             }
         });
     } else {
+        // Handle unsupported methods
         response.writeHead(405, { 'Content-Type': 'application/json' });
         response.end(JSON.stringify({ error: 'Method Not Allowed' }));
     }
