@@ -18,12 +18,16 @@ const server = createServer((request, response) => {
                 request.on('end', () => {
                     try {
                         const jsonBody = JSON.parse(body);
+                        const dir = 'guests';
+                        if (!existsSync(dir)) {
+                            mkdirSync(dir);
+                        }
                         writeFile(filePath, JSON.stringify(jsonBody), 'utf8', (err) => {
                             if (err) {
                                 response.writeHead(500, { 'Content-Type': 'application/json' });
                                 response.end(JSON.stringify({ error: 'server failed' }));
                             } else {
-                                response.writeHead(200, { 'Content-Type': 'application/json' });
+                                response.writeHead(201, { 'Content-Type': 'application/json' });
                                 response.end(JSON.stringify(jsonBody));
                             }
                         });
