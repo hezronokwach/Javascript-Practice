@@ -4,35 +4,7 @@ import { argv } from "process";
 
 const [_, __, filename, action, item, quantity] = argv;
 
-switch (action) {
-    case 'create':
-        createFile(filename);
-        break;
-    case 'delete':
-        deleteFile(filename);
-        break;
-    case 'add':
-        if (!item) {
-            console.error("No elem specified.")
-        } else {
-            add(filename, item, quantity);
-        }
-        break;
-    case 'rm':
-        if (!item) {
-            console.error("No elem specified.")
-        } else {
-            remove(filename, item, quantity);
-        }
-        break;
-    case 'ls':
-        listItems(filename);
-        break;
-    case 'help':
-    default:
-        printHelp();
-        break;
-}
+
 
 function createFile(filename) {
     if (existsSync(filename)) {
@@ -132,3 +104,32 @@ function printHelp() {
 
 }
 
+switch (action) {
+    case 'create':
+        createFile(filename);
+        break;
+    case 'delete':
+        deleteFile(filename);
+        break;
+    case 'add':
+        if (!item) {
+            console.error("No elem specified.")
+        } else {
+            add(filename, item, quantity);
+        }
+        break;
+    case 'rm':
+        if (!item) {
+            console.error("No elem specified.")
+        } else {
+            remove(filename, item, quantity);
+        }
+        break;
+    case 'ls':
+        listItems(filename);
+        break;
+    case 'help':
+    default:
+        printHelp();
+        break;
+}
