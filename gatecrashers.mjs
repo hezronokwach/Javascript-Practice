@@ -4,7 +4,7 @@ import { join } from 'node:path';
 let port = 5000
 
 const server = createServer((request, response) => {
-        if (request.method === 'POST') {
+    if (request.method === 'POST') {
         if (request.headers.authorization) {
             const [username, password] = Buffer.from(request.headers.authorization.split(' ')[1], 'base64').toString().split(':');
             const authorizedUsers = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
@@ -19,25 +19,25 @@ const server = createServer((request, response) => {
                     try {
                         writeFile(filePath, body, 'utf8', (err) => {
                             if (err) {
-                                response.writeHead(500, {'Content-Type': 'application/json'});
+                                response.writeHead(500, { 'Content-Type': 'application/json' });
                                 response.end(JSON.stringify({ error: 'server failed' }));
                             } else {
-                                response.writeHead(201, {'Content-Type': 'application/json'});
+                                response.writeHead(200, { 'Content-Type': 'application/json' });
                                 response.end(body);
                             }
                         });
                     } catch (parseError) {
-                        response.writeHead(500, {'Content-Type': 'application/json'});
+                        response.writeHead(500, { 'Content-Type': 'application/json' });
                         response.end(JSON.stringify({ error: 'server failed' }));
                     }
                 });
             } else {
-                response.writeHead(401, {'Content-Type': 'text/plain'});
+                response.writeHead(401, { 'Content-Type': 'text/plain' });
                 response.end(JSON.stringify('Authorization Required%'));
             }
         } else {
-            response.writeHead(401, {'Content-Type': 'text/plain'});
-            response.end(JSON.stringify('Authorization Required%' ));
+            response.writeHead(401, { 'Content-Type': 'text/plain' });
+            response.end(JSON.stringify('Authorization Required%'));
         }
     }
 });
