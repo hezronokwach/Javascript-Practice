@@ -13,14 +13,14 @@ switch (action) {
         break;
     case 'add':
         if (!item) {
-            console.log("No elem specified")
+            console.error("No elem specified")
         } else {
             add(filename, item, quantity);
         }
         break;
     case 'rm':
         if (!item) {
-            console.log("No elem specified")
+            console.error("No elem specified")
         } else {
             remove(filename, item, quantity);
         }
