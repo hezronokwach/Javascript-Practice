@@ -1,34 +1,33 @@
 import { createServer } from 'node:http';
-import { writeFile } from 'fs/promises';
+import { writeFile, mkdir } from 'fs/promises';
 import { Buffer } from 'node:buffer';
-import { mkdir } from 'fs/promises';
 import { existsSync } from 'fs';
 
-let port = 5000
-const pathGuests = 'guests';
+const PORT = 5000;
+const GUESTS_DIR = 'guests';
 
 const server = createServer((request, response) => {
     if (request.method === 'POST') {
         if (request.headers.authorization) {
             const [username, password] = Buffer.from(request.headers.authorization.split(' ')[1], 'base64').toString().split(':');
-            const authorizedUsers = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
-            if (authorizedUsers.includes(username) && password === 'abracadabra') {
+            const AUTHORIZED_USERS = ['Caleb_Squires', 'Tyrique_Dalton', 'Rahima_Young'];
+            if (AUTHORIZED_USERS.includes(username) && password === 'abracadabra') {
                 const guestName = request.url.slice(1);
-                let body = '';
+                let requestBody = '';
 
-                request.on('data', chunk => body += chunk.toString());
+                request.on('data', chunk => requestBody += chunk.toString());
                 request.on('end', async () => {
                     try {
-                        const jsonBody = JSON.parse(body);
-                        if (!existsSync(pathGuests)) {
-                            await mkdir(pathGuests, { recursive: true });
+                        const parsedBody = JSON.parse(requestBody);
+                        if (!existsSync(GUESTS_DIR)) {
+                            await mkdir(GUESTS_DIR, { recursive: true });
                         }
-                        await writeFile(`${pathGuests}/${guestName}.json`, JSON.stringify(jsonBody));
+                        await writeFile(`${GUESTS_DIR}/${guestName}.json`, JSON.stringify(parsedBody));
                         response.writeHead(200, {
                             'Content-Type': 'application/json',
-                            'Content-Length': Buffer.byteLength(JSON.stringify(jsonBody))
+                            'Content-Length': Buffer.byteLength(JSON.stringify(parsedBody))
                         });
-                        response.end(JSON.stringify(jsonBody));
+                        response.end(JSON.stringify(parsedBody));
                     } catch (error) {
                         if (error instanceof SyntaxError) {
                             response.writeHead(400, { 'Content-Type': 'application/json' });
@@ -41,15 +40,15 @@ const server = createServer((request, response) => {
                 });
             } else {
                 response.writeHead(401, { 'Content-Type': 'text/plain' });
-                response.end(JSON.stringify('Authorization Required%'));
+                response.end(JSON.stringify('Authorization Required'));
             }
         } else {
             response.writeHead(401, { 'Content-Type': 'text/plain' });
-            response.end(JSON.stringify('Authorization Required%'));
+            response.end(JSON.stringify('Authorization Required'));
         }
     }
 });
 
-server.listen(port, () => {
-    console.log(`Server started on localhost:${port}!`);
+server.listen(PORT, () => {
+    console.log(`Server started on localhost:${PORT}!`);
 });
