@@ -1,36 +1,35 @@
 import { createServer } from 'node:http';
 import { writeFile } from 'node:fs';
+import { join } from 'node:path';
 let port = 5000
 
 const server = createServer((request, response) => {
-    const url = new URL(request.url, `http://${request.headers.host}`);
-    const guestName = url.pathname.slice(1);
-    response.setHeader('Content-Type', 'application/json');
     if (request.method === 'POST') {
+        const guestName = request.url.slice(1);
+        const filePath = join('guests', `${guestName}.json`);
         let body = '';
-        request.on('data', chunk => body += chunk);
+
+        request.on('data', chunk => body += chunk.toString());
+
         request.on('end', () => {
             try {
-                const jsonContent = JSON.parse(body);
-                writeFile(`guests/${guestName}.json`, JSON.stringify(jsonContent), (err) => {
+                writeFile(filePath, body, 'utf8', (err) => {
                     if (err) {
-                        console.error('Error writing file:', err);
-                        response.statusCode = 500;
-                        response.end(JSON.stringify({ error: "server failed" }));
+                        response.writeHead(500, {'Content-Type': 'application/json'});
+                        response.end(JSON.stringify({ error: 'server failed' }));
                     } else {
-                        response.statusCode = 201;
-                        response.end(JSON.stringify(jsonContent));
+                        response.writeHead(201, {'Content-Type': 'application/json'});
+                        response.end(body);
                     }
                 });
-            } catch (error) {
-                console.error('Error parsing JSON:', error);
-                response.statusCode = 400;
-                response.end(JSON.stringify({ error: "Invalid JSON" }));
+            } catch (parseError) {
+                response.writeHead(500, {'Content-Type': 'application/json'});
+                response.end(JSON.stringify({ error: 'server failed' }));
             }
         });
     } else {
-        response.statusCode = 405;
-        response.end(JSON.stringify({ error: "wrong method" }));
+        response.writeHead(405, {'Content-Type': 'application/json'});
+        response.end(JSON.stringify({ error: 'method not allowed' }));
     }
 });
 
