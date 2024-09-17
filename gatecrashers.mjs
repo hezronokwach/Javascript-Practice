@@ -1,6 +1,8 @@
 import { createServer } from 'node:http';
 import { writeFile } from 'fs/promises';
 import { Buffer } from 'node:buffer';
+import { mkdir } from 'fs/promises';
+import { existsSync } from 'fs';
 
 let port = 5000
 const pathGuests = 'guests';
@@ -15,25 +17,26 @@ const server = createServer((request, response) => {
                 let body = '';
 
                 request.on('data', chunk => body += chunk.toString());
-
-                request.on('end', () => {
+                request.on('end', async () => {
                     try {
                         const jsonBody = JSON.parse(body);
-                        writeFile(`${pathGuests}/${guestName}.json`, JSON.stringify(jsonBody))
-                            .then(() => {
-                                response.writeHead(200, {
-                                    'Content-Type': 'application/json',
-                                    'Content-Length': Buffer.byteLength(JSON.stringify(jsonBody))
-                                });
-                                response.end(JSON.stringify(jsonBody));
-                            })
-                            .catch((err) => {
-                                response.writeHead(500, { 'Content-Type': 'application/json' });
-                                response.end(JSON.stringify({ error: 'server failed' }));
-                            });
-                    } catch (parseError) {
-                        response.writeHead(400, { 'Content-Type': 'application/json' });
-                        response.end(JSON.stringify({ error: 'Invalid JSON' }));
+                        if (!existsSync(pathGuests)) {
+                            await mkdir(pathGuests, { recursive: true });
+                        }
+                        await writeFile(`${pathGuests}/${guestName}.json`, JSON.stringify(jsonBody));
+                        response.writeHead(200, {
+                            'Content-Type': 'application/json',
+                            'Content-Length': Buffer.byteLength(JSON.stringify(jsonBody))
+                        });
+                        response.end(JSON.stringify(jsonBody));
+                    } catch (error) {
+                        if (error instanceof SyntaxError) {
+                            response.writeHead(400, { 'Content-Type': 'application/json' });
+                            response.end(JSON.stringify({ error: 'Invalid JSON' }));
+                        } else {
+                            response.writeHead(500, { 'Content-Type': 'application/json' });
+                            response.end(JSON.stringify({ error: 'server failed' }));
+                        }
                     }
                 });
             } else {
