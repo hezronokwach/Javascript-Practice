@@ -23,7 +23,7 @@ const server = createServer((request, response) => {
                                 response.end(JSON.stringify({ error: 'server failed' }));
                             } else {
                                 response.writeHead(200, { 'Content-Type': 'application/json' });
-                                response.end(body);
+                                response.end(JSON.stringify(JSON.parse(body)));
                             }
                         });
                     } catch (parseError) {
