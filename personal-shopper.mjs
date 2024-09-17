@@ -110,17 +110,15 @@ switch (action) {
         deleteFile(filename);
         break;
     case 'add':
-        if (!item) {
-            console.error("No elem specified.")
-        } else {
-            add(filename, item, quantity);
-        }
+        if (!item) { console.error('No elem specified.'); break; }
+        if (!number) number = 1;
+        if (number < 0) { await remove(filename, item, -number) } else { await add(filename, item, number); }
         break;
-    case 'rm':        
+    case 'rm':
         if (!item) { console.error('No elem specified.'); break }
         if (quantity === undefined) { await remove(filename, item, Infinity); break; }
         if (isNaN(number)) { console.error('Unexpected request: nothing has been removed'); break }
-        if (number < 0) { await addItem(filename, item, -number) } else { await remove(filename, item, number); }
+        if (number < 0) { await add(filename, item, -number) } else { await remove(filename, item, number); }
         break;
     case 'ls':
         listItems(filename);
