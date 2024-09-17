@@ -53,28 +53,25 @@ const add = async (filename, item, quantity) => {
     }
 }
 
-const remove = async (filename, item, quantity) => {
-    try {
-        let content = await readFile(filename, 'utf8');
-        let json = JSON.parse(content);
-        if (json.hasOwnProperty(item)) {
-            let quantityToRemove = parseInt(quantity) || json[item];
-            if (quantityToRemove < 0) {
-                json[item] += Math.abs(quantityToRemove);
+const remove = async (filename, item, number) => {
+    readFile(filename)
+        .then((content) => {
+            let items = JSON.parse(content);
+            if (!items[item]) return false;
+            if (items[item] <= number) {
+                delete items[item];
             } else {
-                json[item] -= quantityToRemove;
+                items[item] -= number;
             }
-            if (json[item] <= 0) {
-                delete json[item];
+            return items;
+
+        })
+        .then((items) => {
+            if (items !== false) {
+                writeFile(filename, JSON.stringify(items));
             }
-            await writeFile(filename, JSON.stringify(json, null, 2));
-            console.log(`Removed ${quantity || 'all'} ${item}(s) from the list`);
-        } else {
-            console.log(`${item} not found in the list`);
-        }
-    } catch (err) {
-        console.error("Error updating file:", err);
-    }
+        })
+        .catch((e) => { console.error('Invalide format of the list: ' + e.message); });
 }
 
 const listItems = async (filename) => {
