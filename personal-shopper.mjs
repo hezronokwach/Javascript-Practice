@@ -100,6 +100,7 @@ function printHelp() {
     console.log("help: Show this help message")
 
 }
+let number = parseInt(quantity)
 
 switch (action) {
     case 'create':
@@ -115,12 +116,11 @@ switch (action) {
             add(filename, item, quantity);
         }
         break;
-    case 'rm':
-        if (!item) {
-            console.error("No elem specified.")
-        } else {
-            remove(filename, item, quantity);
-        }
+    case 'rm':        
+        if (!item) { console.error('No elem specified.'); break }
+        if (quantity === undefined) { await remove(filename, item, Infinity); break; }
+        if (isNaN(number)) { console.error('Unexpected request: nothing has been removed'); break }
+        if (number < 0) { await addItem(filename, item, -number) } else { await remove(filename, item, number); }
         break;
     case 'ls':
         listItems(filename);
@@ -129,4 +129,6 @@ switch (action) {
     default:
         printHelp();
         break;
+
+
 }
